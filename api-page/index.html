@@ -896,17 +896,7 @@
   </div>
 
   <script>
-      (function(){
-      const peringatanBox = document.getElementById('peringatanBox');
-      const tombolTutup = document.getElementById('tutupPeringatan');
-
-      tombolTutup.addEventListener('click', () => {
-        peringatanBox.style.animation = 'fadeOutUp 0.4s ease forwards';
-        peringatanBox.addEventListener('animationend', () => {
-          peringatanBox.style.display = 'none';
-        }, { once: true });
-      });
-    })();
+      
   (async () => {
   const settings = await fetch("/settings.json").then(res => res.json());
   let favicon = document.getElementById("icon").href = settings.favicon
@@ -1098,6 +1088,18 @@
         fetchAPI(endpoint);
       });
     }    
+
+    (function(){
+      const peringatanBox = document.getElementById('peringatanBox');
+      const tombolTutup = document.getElementById('tutupPeringatan');
+
+      tombolTutup.addEventListener('click', () => {
+        peringatanBox.style.animation = 'fadeOutUp 0.4s ease forwards';
+        peringatanBox.addEventListener('animationend', () => {
+          peringatanBox.style.display = 'none';
+        }, { once: true });
+      });
+    })();
 
     function fetchAPI(endpoint) {
       const fullURL = window.location.origin + endpoint;
