@@ -29,8 +29,6 @@ async function getBmkg() {
 
 module.exports = function(app) {
 app.get('/stalk/bmkg', async (req, res) => {
-const { apikey } = req.query;
-if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })  
         try {            
             const result = await getBmkg();  
             res.status(200).json({
