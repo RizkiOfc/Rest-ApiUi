@@ -1,0 +1,291 @@
+{
+  "creator": "Rizki",
+  "whatsapp": "https://wa.me/6287794585528",
+  "github": "https://github.com/rizzkyofc",
+  "youtube": "https://youtube.com/@RizzKyxF",
+  "favicon": "./api-page/download.jpg", 
+  "apititle": "Rest Api.",
+  "apikey": [
+    "new",
+    "rizkinew",
+    "rizki#"
+  ], 
+  "endpoints": {
+  "openai": [
+    {
+      "name": "Deepseek",
+      "desc": "Deepseek ai",
+      "status": "Active",
+      "path": "/ai/deepseek?apikey=&text="
+    },
+    {
+      "name": "Openai",
+      "desc": "Openai chat",
+      "status": "Active",
+      "path": "/ai/openai?apikey=&text="
+    }
+  ],
+  "orderkuota": [
+    {
+      "name": "Create Payment",
+      "desc": "Create qris payment",
+      "status": "Active",
+      "path": "/orderkuota/createpayment?apikey=&amount=&codeqr="
+    },
+    {
+      "name": "Cek Status",
+      "desc": "Cek status payment",
+      "status": "Active",
+      "path": "/orderkuota/cekstatus?apikey=&merchant=&keyorkut="
+    }
+  ],
+  "downloader": [
+    {
+      "name": "Tiktok",
+      "desc": "Downloader tiktok",
+      "status": "Active",
+      "path": "/download/tiktok?apikey=&url="
+    },
+    {
+      "name": "Tiktok V2",
+      "desc": "Downloader tiktok v2",
+      "status": "Active",
+      "path": "/download/tiktok-v2?apikey=&url="
+    },
+    {
+      "name": "Capcut",
+      "desc": "Downloader capcut",
+      "status": "Active",
+      "path": "/download/capcut?apikey=&url="
+    },
+    {
+      "name": "Spotify",
+      "desc": "Downloader spotify",
+      "status": "Active",
+      "path": "/download/spotify?apikey=&url="
+    },
+    {
+      "name": "XNXX",
+      "desc": "Downloader xnxx",
+      "status": "Active",
+      "path": "/download/xnxx?apikey=&url="
+    },
+    {
+      "name": "Instagram",
+      "desc": "Downloader instagram",
+      "status": "Active",
+      "path": "/download/instagram?apikey=&url="
+    },
+    {
+      "name": "Facebook",
+      "desc": "Downloader facebook",
+      "status": "Active",
+      "path": "/download/facebook?apikey=&url="
+    },
+    {
+      "name": "Videy",
+      "desc": "Downloader videy",
+      "status": "Active",
+      "path": "/download/videy?apikey=&url="
+    },
+    {
+      "name": "Ytmp4",
+      "desc": "Downloader Youtube mp4",
+      "status": "Active",
+      "path": "/download/ytmp4?apikey=&url="
+    },
+    {
+      "name": "Ytmp3",
+      "desc": "Downloader Youtube mp3",
+      "status": "Active",
+      "path": "/download/ytmp3?apikey=&url="
+    },    
+    {
+      "name": "Snackvideo",
+      "desc": "Downloader snackvideo",
+      "status": "Active",
+      "path": "/download/snackvideo?apikey=&url="
+    },
+    {
+      "name": "Gitclone",
+      "desc": "Downloader gitclone",
+      "status": "Active",
+      "path": "/download/github?apikey=&url="
+    },
+    {
+      "name": "Mediafire",
+      "desc": "Downloader mediafire",
+      "status": "Active",
+      "path": "/download/mediafire?apikey=&url="
+    }
+  ],
+  "random": [
+    {
+      "name": "Blue Archive",
+      "desc": "Random foto blue archive",
+      "status": "Active",
+      "path": "/random/ba?apikey="
+    },
+    {
+      "name": "Random Waifu",
+      "desc": "Random foto waifu",
+      "status": "Active",
+      "path": "/random/waifu?apikey="
+    },
+    {
+      "name": "Random Nsfw",
+      "desc": "Random foto nsfw",
+      "status": "Active",
+      "path": "/random/nsfw?apikey="
+    },
+    {
+      "name": "Pap Ayang",
+      "desc": "Random pap ayang",
+      "status": "Active",
+      "path": "/random/papayang?apikey="
+    }
+  ],
+  "search": [
+    {
+      "name": "Youtube Search",
+      "desc": "Search youtube video",
+      "status": "Active",
+      "path": "/search/youtube?apikey=&q="
+    },
+    {
+      "name": "Tiktok Search",
+      "desc": "Search tiktok video",
+      "status": "Active",
+      "path": "/search/tiktok?apikey=&q="
+    },
+    {
+      "name": "Npm Search",
+      "desc": "Search npm nodejs",
+      "status": "Active",
+      "path": "/search/npm?apikey=&q="
+    },
+    {
+      "name": "Pinterest",
+      "desc": "Search pinterest foto",
+      "status": "Active",
+      "path": "/search/pinterest?apikey=&q="
+    },
+    {
+      "name": "Playstore",
+      "desc": "Search playstore apk",
+      "status": "Active",
+      "path": "/search/playstore?apikey=&q="
+    },
+    {
+      "name": "Happymod",
+      "desc": "Search happymod apk",
+      "status": "Active",
+      "path": "/search/happymod?apikey=&q="
+    },
+    {
+      "name": "XNXX Search",
+      "desc": "Search xnxx video",
+      "status": "Active",
+      "path": "/search/xnxx?apikey=&q="
+    }
+  ],
+  "tools": [
+    {
+      "name": "Text-to-speech",
+      "desc": "Tts anime character",
+      "status": "Active",
+      "path": "/tools/text-to-speech?apikey=&text="
+    },
+    {
+      "name": "Screenshot Web",
+      "desc": "Screenshot web url",
+      "status": "Active",
+      "path": "/tools/ssweb?apikey=&url="
+    },
+    {
+      "name": "Emoji To Gif",
+      "desc": "Convert emoji to gif",
+      "status": "Active",
+      "path": "/tools/emojitogif?apikey=&emoji="
+    },
+    {
+      "name": "Emoji Mix",
+      "desc": "Emoji mix converter",
+      "status": "Active",
+      "path": "/tools/emojimix?apikey=&emoji1=&emoji2="
+    }
+  ],
+  "stalker": [
+    {
+      "name": "Instagram Stalk",
+      "desc": "Stalk instagram account",
+      "status": "Active",
+      "path": "/stalk/instagram?apikey=&user="
+    },
+    {
+      "name": "Bmkg",
+      "desc": "Bmkg",
+      "status": "Active",
+      "path": "/stalk/bmkg"
+    },
+    {
+      "name": "Tiktok Stalk",
+      "desc": "Stalk tiktok account",
+      "status": "Active",
+      "path": "/stalk/tiktok?apikey=&user="
+    },
+    {
+      "name": "Npm Stalk",
+      "desc": "Stalk npm package",
+      "status": "Active",
+      "path": "/stalk/npm?apikey=&name="
+    },
+    {
+      "name": "FF Stalk",
+      "desc": "Stalk free fire account",
+      "status": "Active",
+      "path": "/stalk/ff?apikey=&id="
+    }
+  ],
+  "creator": [
+    {
+      "name": "Remini",
+      "desc": "Remini image",
+      "status": "Active",
+      "path": "/imagecreator/remini?apikey=&url="
+    },
+    {
+      "name": "Removebg",
+      "desc": "Remove background image",
+      "status": "Active",
+      "path": "/imagecreator/removebg?apikey=&url="
+    },
+    {
+      "name": "Upscale",
+      "desc": "Upscale image",
+      "status": "Active",
+      "path": "/imagecreator/upscale?apikey=&url="
+    },
+    {
+      "name": "Colorize",
+      "desc": "Colorize image",
+      "status": "Active",
+      "path": "/imagecreator/colorize?apikey=&url="
+    },
+    {
+      "name": "Brat",
+      "desc": "Brat text generator",
+      "status": "Active",
+      "path": "/imagecreator/brat?apikey=&text="
+    }
+  ],
+  "api": [
+    {
+      "name": "Status Api",
+      "desc": "",
+      "status": "Active",
+      "path": "/api/status"
+    }
+  ]
+}
+}
