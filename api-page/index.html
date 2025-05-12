@@ -993,18 +993,40 @@ body.dark-mode .modal-dialog {
         tabsContainer.appendChild(button);
       });
 
-      (function(){
-      const peringatanBox = document.getElementById('peringatanBox');
-      const tombolTutup = document.getElementById('tutupPeringatan');
+      /**
+ * JavaScript to automatically hide a warning box after 10 seconds with fade out animation.
+ * 
+ * Assumes:
+ * - Warning container has id="peringatanBox"
+ * - Fade out animation named 'fadeOutUp' defined in CSS
+ * - Close button optionally with id="tutupPeringatan"
+ */
 
-      tombolTutup.addEventListener('click', () => {
-        peringatanBox.style.animation = 'fadeOutUp 0.4s ease forwards';
-        peringatanBox.addEventListener('animationend', () => {
-          peringatanBox.style.display = 'none';
-        }, { once: true });
-      });
-    })();
+(function() {
+  const peringatanBox = document.getElementById('peringatanBox');
+  const tombolTutup = document.getElementById('tutupPeringatan');
 
+  if (!peringatanBox) return;
+
+  function closeWarning() {
+    // Apply fade out animation
+    peringatanBox.style.animation = 'fadeOutUp 0.4s ease forwards';
+    // After animation ends, hide the element
+    peringatanBox.addEventListener('animationend', () => {
+      peringatanBox.style.display = 'none';
+    }, { once: true });
+  }
+
+  // Attach click event to close button if exists
+  if (tombolTutup) {
+    tombolTutup.addEventListener('click', closeWarning);
+  }
+
+  // Auto close after 10 seconds (10000 ms)
+  setTimeout(closeWarning, 10000);
+})();
+
+    
       // Render API cards
       
 
