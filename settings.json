@@ -123,7 +123,7 @@
     {
       "name": "Mediafire",
       "desc": "Downloader mediafire",
-      "status": "maintance",
+      "status": "danger",
       "path": "/download/mediafire?apikey=&url="
     }
   ],
