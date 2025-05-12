@@ -35,6 +35,101 @@
     animation: spin 1s linear infinite;
     margin-bottom: 10px;
   }
+
+  .peringatan-container {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 340px;
+      width: 90vw;
+      background: linear-gradient(135deg, #ff6633, #ff3300);
+      color: white;
+      padding: 20px 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(255, 51, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-sizing: border-box;
+      animation: fadeInDown 0.5s ease forwards;
+      user-select: none;
+      z-index: 9999;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+
+    .ikon-peringatan {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1;
+      color: white;
+      box-shadow: 0 0 6px rgba(255,255,255,0.5);
+      user-select: none;
+    }
+
+    .teks-peringatan {
+      flex-grow: 1;
+      /* allow line breaks */
+      word-break: break-word;
+    }
+
+    .teks-peringatan a {
+      color: #fffacd;
+      font-weight: 700;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+    .teks-peringatan a:hover,
+    .teks-peringatan a:focus {
+      color: #ffe080;
+      outline: none;
+    }
+
+    .teks-peringatan span {
+      font-family: monospace;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      user-select: text;
+    }
+
+    .tombol-tutup {
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color 0.25s ease, background-color 0.25s ease;
+      user-select: none;
+    }
+    .tombol-tutup:hover,
+    .tombol-tutup:focus {
+      color: white;
+      background-color: rgba(255,255,255,0.2);
+      outline: none;
+    }
+
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px) translateX(-50%);}
+      to {opacity: 1; transform: translateY(0) translateX(-50%);}
+    }
+    @keyframes fadeOutUp {
+      from {opacity: 1; transform: translateY(0) translateX(-50%);}
+      to {opacity: 0; transform: translateY(-20px) translateX(-50%);}
+                                                                }
   
   :root {
     --primary: #3ba7ff;
@@ -792,6 +887,14 @@
     </div>
   </footer>
 
+    <div class="peringatan-container" role="alert" aria-live="assertive" aria-atomic="true" id="peringatanBox">
+    <div class="ikon-peringatan" aria-hidden="true">!</div>
+    <div class="teks-peringatan">
+      Peringatan. Key nya Bisa Req Ke <a href="https://wa.me/6287794585528" target="_blank" rel="noopener noreferrer">Whatsapp</a>. Atau Bisa Pake <span>['new', 'rizki']</span>, Terima Kasih
+    </div>
+    <button class="tombol-tutup" aria-label="Tutup peringatan" id="tutupPeringatan">&times;</button>
+    </div>
+
   <script>
   (async () => {
   const settings = await fetch("/settings.json").then(res => res.json());
@@ -845,6 +948,18 @@
         button.innerText = key.charAt(0).toUpperCase() + key.slice(1);
         tabsContainer.appendChild(button);
       });
+
+      (function(){
+      const peringatanBox = document.getElementById('peringatanBox');
+      const tombolTutup = document.getElementById('tutupPeringatan');
+
+      tombolTutup.addEventListener('click', () => {
+        peringatanBox.style.animation = 'fadeOutUp 0.4s ease forwards';
+        peringatanBox.addEventListener('animationend', () => {
+          peringatanBox.style.display = 'none';
+        }, { once: true });
+      });
+    })();
 
       // Render API cards
       function renderAPIs(category) {
