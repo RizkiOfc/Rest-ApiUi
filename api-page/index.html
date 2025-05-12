@@ -1006,6 +1006,32 @@
         }
       });
 
+    fetch('/settings.json')
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'Error') {
+        // Cek apakah CSS punya selector .status
+        const adaStatusSelector = Array.from(document.styleSheets).some(sheet => {
+          try {
+            return Array.from(sheet.cssRules || []).some(rule => 
+              rule.selectorText === '.status'
+            );
+          } catch (e) {
+            return false; // Lewati jika kena CORS
+          }
+        });
+
+        // Jika ada .status di CSS, ubah warnanya
+        if (adaStatusSelector) {
+          const elemen = document.querySelector('.status');
+          if (elemen) {
+            elemen.style.backgroundColor = 'red';
+          }
+        }
+      }
+    })
+    .catch(err => console.error("Gagal baca settings.json:", err));
+
       // Event listeners
       document.addEventListener("click", (e) => {
         // Play button click
