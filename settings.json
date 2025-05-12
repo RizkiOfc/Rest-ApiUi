@@ -3,7 +3,7 @@
   "whatsapp": "https://wa.me/6287794585528",
   "github": "https://github.com/rizzkyofc",
   "youtube": "https://youtube.com/@RizzKyxF",
-  "favicon": "https://files.catbox.moe/feg1ko.jpg", 
+  "favicon": "./page-api/download.jpg", 
   "apititle": "Bot Whatsapp Api.",
   "apikey": [
     "new",
