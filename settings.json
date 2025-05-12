@@ -39,6 +39,14 @@
       "path": "/orderkuota/cekstatus?apikey=&merchant=&keyorkut="
     }
   ],
+  "news": [
+    {
+      "name": "Tribun",
+      "desc": "Tribun News",
+      "status": "Active",
+      "path": "/news/tribun"
+    }
+  ]
   "downloader": [
     {
       "name": "Tiktok",
