@@ -834,6 +834,11 @@
   </div>
 
   <div class="container">
+    <div style="text-align: right; margin-bottom: 1rem;">
+  <button id="themeToggle" style="padding: 8px 16px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; background: var(--darker); color: white; box-shadow: var(--shadow);">
+    <i id="themeIcon" class="fas fa-moon"></i>
+  </button>
+    </div>
     <section class="hero fade-in">
       <div class="title-container">
         <h2 id="apiTitle"></h2>
@@ -1149,6 +1154,34 @@
           responseEl.innerHTML = `<pre>Error: ${err.message}</pre>`;
         });
     }
+    const themeBtn = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+const savedTheme = localStorage.getItem("theme");
+
+// Atur tema awal
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+  themeIcon.classList.remove("fa-moon");
+  themeIcon.classList.add("fa-sun");
+}
+
+// Toggle tema saat tombol diklik
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  const isDark = document.body.classList.contains("dark-mode");
+
+  // Ganti ikon
+  if (isDark) {
+    themeIcon.classList.remove("fa-moon");
+    themeIcon.classList.add("fa-sun");
+  } else {
+    themeIcon.classList.remove("fa-sun");
+    themeIcon.classList.add("fa-moon");
+  }
+
+  // Simpan ke localStorage
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+});
   </script>
 </body>
 </html>
