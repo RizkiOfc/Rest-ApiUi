@@ -770,7 +770,7 @@
           </button>
         </div>
         <form id="paramForm" style="margin-bottom: 0.5rem"></form>
-        <button id="submitParamBtn" type="button">Submit Request</button>
+        <button id="submitParamBtn" type="button">Request</button>
         <div id="apiResponseLoading" class="loading-spinner" style="display: none;"></div>
         <div id="apiResponseContent" class="d-none"></div>
       </div>
@@ -830,8 +830,8 @@
       };
 
       setContent("page", "textContent", "Docs - " + settings.apititle || "Docs - Skyzopedia API");
-      setContent("credits", "textContent", `© ${new Date().getFullYear()} Powered by ${settings.creator || "Skyzopedia"}`);
-      setContent("apiTitle", "textContent", settings.apititle || "Skyzopedia API");
+      setContent("credits", "textContent", `© ${new Date().getFullYear()} Powered by ${settings.creator || "Rizki"}`);
+      setContent("apiTitle", "textContent", settings.apititle || "Rest API");
 
       document.getElementById("githubLink").href = settings.github || "#";
       document.getElementById("whatsappLink").href = settings.whatsapp || "#";
