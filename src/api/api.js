@@ -1,3 +1,5 @@
+//require('./settings.json');
+
 module.exports = function (app) {
 
 function listRoutes() {
@@ -15,6 +17,7 @@ app.get('/api/status', async (req, res) => {
             res.status(200).json({
                 status: true,
                 result: {
+                key: ['rizki'],
                 status: "Aktif", 
                 totalrequest: global.totalreq.toString(), 
                 totalfitur: `${listRoutes()}`, 
