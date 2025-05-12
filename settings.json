@@ -5,6 +5,12 @@
   "youtube": "https://youtube.com/@RizzKyxF",
   "favicon": "./page-api/download.jpg", 
   "apititle": "Bot Whatsapp Api.",
+    "apikey": [
+    "new",
+    "rizki"
+    "rizkinew",
+    "rizki#"
+  ], 
   "endpoints": {
   "openai": [
     {
