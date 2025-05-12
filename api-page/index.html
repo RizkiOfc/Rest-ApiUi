@@ -962,37 +962,7 @@
     })();
 
       // Render API cards
-      function renderAPIs(category) {
-        apiList.innerHTML = "";
-        apis[category].forEach((api, i) => {
-          const card = document.createElement("div");
-          card.className = "api-card";
-          
-          
-          // Determine status class
-          let statusClass = "";
-          if (api.status.toLowerCase().includes("maintenance")) statusClass = "danger";
-          else if (api.status.toLowerCase().includes("beta")) statusClass = "warning";
-          else statusClass = "";
-          
-          card.innerHTML = `
-            <div class="api-info">
-              <h3>${api.name}</h3>
-              ${api.desc ? `<p>${api.desc}</p>` : "" }
-              <span class="status ${statusClass}">${api.status}</span>
-            </div>
-            <button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc}">
-              <i class="fa-solid fa-play"></i> Try Api
-            </button>
-          `;
-          apiList.appendChild(card);
-          
-          // Trigger reflow to restart animation
-          setTimeout(() => {
-            card.style.animation = `cardEntrance 0.6s ease-out ${i * 0.1}s forwards`;
-          }, 10);
-        });
-      }
+      
 
       // Initial render
       renderAPIs(Object.keys(apis)[0]);
@@ -1006,7 +976,43 @@
         }
       });
 
-    
+    function renderAPIs(category) {
+  apiList.innerHTML = "";
+  apis[category].forEach((api, i) => {
+    const card = document.createElement("div");
+    card.className = "api-card";
+
+    // Tentukan class status berdasarkan teks
+    let statusClass = "";
+    const statusText = api.status.toLowerCase();
+    if (statusText.includes("maintenance") || statusText.includes("error")) {
+      statusClass = "danger";
+    } else if (statusText.includes("beta")) {
+      statusClass = "warning";
+    }
+
+    // Ubah huruf awal jadi kapital
+    const statusTextFormatted = api.status.charAt(0).toUpperCase() + api.status.slice(1).toLowerCase();
+
+    card.innerHTML = `
+      <div class="api-info">
+        <h3>${api.name}</h3>
+        ${api.desc ? `<p>${api.desc}</p>` : ""}
+        <span class="status ${statusClass}">${statusTextFormatted}</span>
+      </div>
+      <button class="play-button" data-endpoint="${api.path}" data-api="${api.name}" data-desc="${api.desc}">
+        <i class="fa-solid fa-play"></i> Try Api
+      </button>
+    `;
+
+    apiList.appendChild(card);
+
+    // Animasi masuk
+    setTimeout(() => {
+      card.style.animation = `cardEntrance 0.6s ease-out ${i * 0.1}s forwards`;
+    }, 10);
+  });
+    }
 
       // Event listeners
       document.addEventListener("click", (e) => {
