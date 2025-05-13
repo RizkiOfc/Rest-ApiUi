@@ -1,15 +1,5 @@
 const fetch = require("node-fetch");
 
-async function bratVid(text) {
-    const res = await fetch(`https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`);
-    const data = await res.json();
-    return {
-        status: true,
-        creator: 'Rizki',
-        result: data.result
-    };
-}
-
 module.exports = function (app) {
     app.get('/imagecreator/bratvid', async (req, res) => {
         try {
@@ -17,8 +7,13 @@ module.exports = function (app) {
             if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' });
             if (!text) return res.json({ status: false, error: 'Parameter `text` wajib diisi' });
 
-            const result = await bratVid(text);
-            res.status(200).json(result);
+            const url = `https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`;
+            const response = await fetch(url);
+            const buffer = await response.buffer();
+
+            res.setHeader('Content-Type', 'video/mp4');
+            res.setHeader('Content-Disposition', 'inline; filename="bratvid.mp4"');
+            res.send(buffer);
         } catch (err) {
             res.status(500).json({ status: false, error: err.message });
         }
