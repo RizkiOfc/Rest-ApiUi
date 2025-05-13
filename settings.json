@@ -3,7 +3,7 @@
   "whatsapp": "https://wa.me/6287794585528",
   "github": "https://github.com/rizzkyofc",
   "youtube": "https://youtube.com/@RizzKyxF",
-  "favicon": "./page-api/download.jpg", 
+  "favicon": "./page-api/download.jpg", mm
   "apititle": "Bot Whatsapp Api.",
     "apikey": [
     "new",
@@ -138,6 +138,12 @@
     {
       "name": "Blue Archive",
       "desc": "Random foto blue archive",
+      "status": "Active",
+      "path": "/random/gore?apikey="
+    },
+    {
+      "name": "Gore",
+      "desc": "Random Gore Kartel",
       "status": "Active",
       "path": "/random/ba?apikey="
     },
