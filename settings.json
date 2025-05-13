@@ -168,6 +168,12 @@
       "path": "/search/tiktok?apikey=&q="
     },
     {
+      "name": "Bing Image",
+      "desc": "Search bing image",
+      "status": "Active",
+      "path": "/search/bingimg?apikey=&q="
+    },
+    {
       "name": "Npm Search",
       "desc": "Search npm nodejs",
       "status": "Active",
