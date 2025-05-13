@@ -11,7 +11,7 @@ async function bratVid(text) {
 }
 
 module.exports = function (app) {
-    app.get('/maker/bratvid', async (req, res) => {
+    app.get('/imagecreator/bratvid', async (req, res) => {
         try {
             const { apikey, text } = req.query;
             if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' });
