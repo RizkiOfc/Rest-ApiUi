@@ -1,12 +1,12 @@
 module.exports = function (app) {
-app.post('/api/device', (req, res) => {
+  app.post('/api/device', (req, res) => {
   try {
     const { battery, timezone } = req.body;
     const userAgent = req.headers['user-agent'];
 
     res.status(200).json({
       status: true,
-      message: 'Info Device',
+      creator: "Rizki",
       result: {
         userAgent,
         timezone,
