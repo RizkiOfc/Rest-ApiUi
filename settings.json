@@ -46,6 +46,12 @@
       "desc": "Tribun News",
       "status": "Active",
       "path": "/news/tribun"
+    },
+    {
+      "name": "Jkt",
+      "desc": "Jkt News",
+      "status": "Active",
+      "path": "/news/jkt"
     }
   ],
   "downloader": [
