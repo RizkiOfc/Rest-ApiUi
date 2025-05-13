@@ -30,7 +30,7 @@ async function bstation(q) {
     });
 });
 
-            if (hasil.length === 0) return resolve({ message: 'Tidak ada hasil yang ditemukan' });
+            //if (hasil.length === 0) return resolve({ message: 'Tidak ada hasil yang ditemukan' });
 
             resolve(hasil.slice(0, Math.max(3, Math.min(5, hasil.length))));
         } catch (err) {
