@@ -316,7 +316,13 @@
       "desc": "Brat text generator",
       "status": "Active",
       "path": "/imagecreator/brat?apikey=&text="
-    }
+    },
+    {
+      "name": "Bratvid",
+      "desc": "Brat Video",
+      "status": "Active",
+      "path": "/imagecreator/bratvid?apikey=&text="
+        }
   ],
   "api": [
     {
