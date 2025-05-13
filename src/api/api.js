@@ -1,4 +1,4 @@
-require('./settings.json');
+//require('./settings.json');
 
 module.exports = function (app) {
 
