@@ -180,6 +180,12 @@
       "path": "/search/tiktok?apikey=&q="
     },
     {
+      "name": "Itch",
+      "desc": "Itch search",
+      "status": "Active",
+      "path": "/search/itch?apikey=&type=&q="
+    },
+    {
       "name": "Bing Image",
       "desc": "Search bing image",
       "status": "Active",
