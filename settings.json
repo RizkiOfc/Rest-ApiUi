@@ -139,7 +139,7 @@
       "name": "Blue Archive",
       "desc": "Random foto blue archive",
       "status": "Active",
-      "path": "/random/ba?pikey="
+      "path": "/random/ba?apikey="
     },
     {
       "name": "Gore",
