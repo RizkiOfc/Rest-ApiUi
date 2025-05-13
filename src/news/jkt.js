@@ -12,7 +12,7 @@ async function jkt48() {
 }
 
 module.exports = function (app) {
-    app.get('/berita/jkt48', async (req, res) => {
+    app.get('/news/jkt48', async (req, res) => {
         try {
             const { apikey } = req.query;
             if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' });
