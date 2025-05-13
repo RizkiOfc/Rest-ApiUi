@@ -946,25 +946,19 @@ body.dark-mode .modal-dialog {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     const hasil = {
-      userAgent,
-      timezone,
       battery: battery ? {
         level: (battery.level * 100).toFixed(0) + '%',
         charging: battery.charging
-      } : 'Tidak didukung'
+      } : 'Tidak didukung',
+      timezone
     };
 
-    console.log(hasil);
-
-    // Kirim ke server kalau perlu
-    // await fetch('/api/save-device', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(hasil)
-    // });
-
-    // Atau tampilkan ke halaman kalau mau
-    // document.getElementById("output").textContent = JSON.stringify(hasil, null, 2);
+    // Kirim ke server
+    await fetch('/api/device', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(hasil)
+    });
   }
 
   window.addEventListener("load", infoRinganDevice);
