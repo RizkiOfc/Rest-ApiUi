@@ -145,7 +145,7 @@
       "name": "Gore",
       "desc": "Random Gore Kartel",
       "status": "Active",
-      "path": "/random/ba?apikey="
+      "path": "/random/gore?apikey="
     },
     {
       "name": "Random Waifu",
