@@ -2,7 +2,7 @@ const axios = require("axios");
 const cheerio = require('cheerio');
 
 module.exports = function (app) {
-async function bsTattion(query) {
+async function bsTation(query) {
     const url = `https://www.bilibili.tv/id/search-result?q=${query}`;
     const { data } = await axios({
         method: "GET",
@@ -40,7 +40,7 @@ async function bsTattion(query) {
     const { query } = req.query.q;
     if (!query) return res.status(400).json({ status: false, message: 'Masukkan parameter q' });
     try {
-      const result = await bsTattion(query);
+      const result = await bsTation(query);
         res.json({ status: true, result });
     } catch (error) {
         console.error(error);
