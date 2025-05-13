@@ -298,7 +298,7 @@
     {
       "name": "Device",
       "desc": "Device Info",
-      "status": "Active",
+      "status": "Error",
       "path": "/api/device"
     }
   ]
