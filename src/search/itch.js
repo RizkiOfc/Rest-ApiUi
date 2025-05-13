@@ -1,6 +1,8 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
+const validTypes = ['games', 'tools', 'comics', 'books', 'assets'];
+
 async function getItch(t, s) {
     const url = `https://itch.io/search?type=${t}&q=${encodeURIComponent(s)}`;
     const { data } = await axios.get(url, {
@@ -40,6 +42,13 @@ module.exports = function (app) {
             const { apikey, type, q } = req.query;
             if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' });
             if (!type || !q) return res.json({ status: false, error: 'Parameter `type` dan `q` wajib diisi' });
+            if (!validTypes.includes(type.toLowerCase()))
+                return res.json({
+                    status: false,
+                    type: {
+                        available: validTypes
+                    }
+                });
 
             const results = await getItch(type, q);
             if (!results.length) return res.json({ status: false, message: 'Tidak ada hasil yang ditemukan' });
