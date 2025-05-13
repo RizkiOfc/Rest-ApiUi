@@ -1,27 +1,32 @@
-const fetch = require('node-fetch');
+const axios = require('axios');
 
 module.exports = function (app) {
     app.get('/imagecreator/bratvid', async (req, res) => {
         try {
             const { apikey, text } = req.query;
-            if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' });
-            if (!text) return res.json({ status: false, error: 'Parameter `text` wajib diisi' });
+            if (!global.apikey.includes(apikey)) {
+                return res.json({ status: false, error: 'Apikey invalid' });
+            }
 
-            const url = `https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`;
-            const response = await fetch(url);
+            if (!text) {
+                return res.json({ status: false, error: 'Parameter `text` wajib diisi' });
+            }
 
-            if (!response.ok) throw new Error('Gagal mengambil video');
-
-            const buffer = await response.buffer();
+            const response = await axios.get(`https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`, {
+                responseType: 'arraybuffer',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0'
+                }
+            });
 
             res.setHeader('Content-Type', 'video/mp4');
-            res.setHeader('Content-Disposition', `inline; filename="bratvid.mp4"`);
-            res.send(buffer);
-        } catch (error) {
+            res.setHeader('Content-Disposition', 'inline; filename="bratvid.mp4"');
+            res.send(response.data);
+        } catch (err) {
             res.status(500).json({
                 status: false,
-                creator: 'Rizki',
-                error: error.message
+                creator: global.creator || 'Rizki',
+                error: err.message
             });
         }
     });
