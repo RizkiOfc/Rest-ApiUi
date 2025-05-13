@@ -180,6 +180,12 @@
       "path": "/search/pinterest?apikey=&q="
     },
     {
+      "name": "BsTation",
+      "desc": "Search Bstation",
+      "status": "Active",
+      "path": "/search/bstation?apikey=&query="
+    },
+    {
       "name": "Playstore",
       "desc": "Search playstore apk",
       "status": "Active",
