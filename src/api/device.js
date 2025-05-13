@@ -28,7 +28,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post('/api/save-device', (req, res) => {
+  app.post('/api/device', (req, res) => {
     const { battery, location } = req.body;
 
     console.log('[DEVICE INFO]');
