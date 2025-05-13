@@ -14,27 +14,23 @@ async function bstation(q) {
             const $ = cheerio.load(data);
             let hasil = [];
 
-            $('.ogv__content').each((_, el) => {
-                const anime = $(el).find('i.highlights__text.highlights__text--active').text().trim();
-                const title = $(el).find('i.highlights__text').text().trim();
-                const views = $(el).find('span.meta__tips-text').text().trim();
-                const description = $(el).find('p.ogv__content-desc').text().trim();
-                const type = $(el).find('.section-title').text().trim() || "Not Found";
-                const play = 'https://www.bilibili.tv' + $(el).find('a').attr('href');
-                const image = $(el).find('.ogv__cover > a > img').attr('src');
+            $('.search-card').each((_, el) => {
+    const title = $(el).find('.video-card__info-title').text().trim();
+    const play = 'https://www.bilibili.tv' + $(el).find('a').attr('href');
+    const image = $(el).find('img').attr('src');
+    const views = $(el).find('.video-card__info-data span').first().text().trim();
+    const description = $(el).find('.video-card__info-desc').text().trim();
 
-                hasil.push({
-                    anime: anime || "Unknown",
-                    title: title || "No Title",
-                    views: views || "No Views",
-                    description: description || "No Description",
-                    play,
-                    type,
-                    image: image || "https://i.ibb.co/Y3qV8Yf/noimage.jpg"
-                });
-            });
+    hasil.push({
+        title: title || "No Title",
+        play,
+        image: image || "https://i.ibb.co/Y3qV8Yf/noimage.jpg",
+        views: views || "No Views",
+        description: description || "No Description"
+    });
+});
 
-            if (hasil.length === 0) return resolve({ mess: 'Tidak ada hasil yang ditemukan' });
+            if (hasil.length === 0) return resolve({ message: 'Tidak ada hasil yang ditemukan' });
 
             resolve(hasil.slice(0, Math.max(3, Math.min(5, hasil.length))));
         } catch (err) {
