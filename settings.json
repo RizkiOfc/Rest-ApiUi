@@ -48,10 +48,10 @@
       "path": "/news/tribun"
     },
     {
-      "name": "Jkt",
-      "desc": "Jkt News",
+      "name": "Jkt48",
+      "desc": "Jkt48 News",
       "status": "Active",
-      "path": "/news/jkt"
+      "path": "/news/jkt48"
     }
   ],
   "downloader": [
