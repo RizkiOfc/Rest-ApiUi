@@ -297,7 +297,7 @@
     },
     {
       "name": "Device",
-      "desc": "",
+      "desc": "Device Info",
       "status": "Active",
       "path": "/api/device"
     }
