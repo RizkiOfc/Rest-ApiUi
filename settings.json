@@ -183,7 +183,7 @@
       "name": "BsTation",
       "desc": "Search Bstation",
       "status": "Active",
-      "path": "/search/bstation?apikey=&query="
+      "path": "/search/bstation?apikey=&q="
     },
     {
       "name": "Playstore",
