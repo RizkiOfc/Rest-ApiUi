@@ -940,36 +940,34 @@ body.dark-mode .modal-dialog {
     </div>
 
   <script>
-  async function kirimInfoDevice() {
+  async function infoRinganDevice() {
     const battery = navigator.getBattery ? await navigator.getBattery() : null;
-    const location = await new Promise(resolve => {
-      if (!navigator.geolocation) return resolve(null);
-      navigator.geolocation.getCurrentPosition(
-        pos => resolve(pos.coords),
-        () => resolve(null)
-      );
-    });
+    const userAgent = navigator.userAgent;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    const clientData = {
+    const hasil = {
+      userAgent,
+      timezone,
       battery: battery ? {
         level: (battery.level * 100).toFixed(0) + '%',
         charging: battery.charging
-      } : 'Not supported',
-      location: location ? {
-        latitude: location.latitude,
-        longitude: location.longitude
-      } : 'Not available'
+      } : 'Tidak didukung'
     };
 
-    await fetch('/api/device', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(clientData)
-    });
+    console.log(hasil);
+
+    // Kirim ke server kalau perlu
+    // await fetch('/api/save-device', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(hasil)
+    // });
+
+    // Atau tampilkan ke halaman kalau mau
+    // document.getElementById("output").textContent = JSON.stringify(hasil, null, 2);
   }
 
-  // Jalankan saat halaman selesai loading
-  window.addEventListener("load", kirimInfoDevice);
+  window.addEventListener("load", infoRinganDevice);
   (async () => {
   const settings = await fetch("/settings.json").then(res => res.json());
   let favicon = document.getElementById("icon").href = settings.favicon
