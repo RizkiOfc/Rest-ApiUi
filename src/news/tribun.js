@@ -34,8 +34,6 @@ async function tirbunNews() {
 module.exports = function(app) {
 app.get('/news/tribun', async (req, res) => {    
         try {            
-            const { apikey } = req.query;
-            if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })
             
             const results = await tirbunNews();  
             res.status(200).json({
