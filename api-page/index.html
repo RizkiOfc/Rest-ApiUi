@@ -1051,7 +1051,7 @@ body.dark-mode .modal-dialog {
     // Tentukan class status berdasarkan teks
     let statusClass = "";
     const statusText = api.status.toLowerCase();
-    if (statusText.includes("maintenance") || statusText.includes("error")) {
+    if (statusText.includes("maintance") || statusText.includes("error")) {
       statusClass = "danger";
     } else if (statusText.includes("beta")) {
       statusClass = "warning";
