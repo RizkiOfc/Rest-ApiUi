@@ -37,6 +37,8 @@ async function bsTation(q) {
 }
 module.exports = function (app) {
   app.get('/search/bstation', async(req, res) => {
+    const { apikey } = req.query;
+            if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })
     const { query } = req.query;
     if (!query) return res.status(400).json({ status: false, message: 'Masukkan parameter q' });
     try {
