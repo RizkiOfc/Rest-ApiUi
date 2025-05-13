@@ -6,7 +6,7 @@ async function jkt48() {
 
     return {
         status: true,
-        creator: global.creator || 'Rizki',
+        creator: 'Rizki',
         result: b.data
     };
 }
