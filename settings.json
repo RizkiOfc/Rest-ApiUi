@@ -294,6 +294,12 @@
       "desc": "",
       "status": "Active",
       "path": "/api/status"
+    },
+    {
+      "name": "Device",
+      "desc": "",
+      "status": "Active",
+      "path": "/api/device"
     }
   ]
 }
