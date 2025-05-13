@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const fetch = require('node-fetch');
 
 module.exports = function (app) {
     app.get('/imagecreator/bratvid', async (req, res) => {
@@ -9,13 +9,20 @@ module.exports = function (app) {
 
             const url = `https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`;
             const response = await fetch(url);
+
+            if (!response.ok) throw new Error('Gagal mengambil video');
+
             const buffer = await response.buffer();
 
             res.setHeader('Content-Type', 'video/mp4');
-            res.setHeader('Content-Disposition', 'inline; filename="bratvid.mp4"');
+            res.setHeader('Content-Disposition', `inline; filename="bratvid.mp4"`);
             res.send(buffer);
-        } catch (err) {
-            res.status(500).json({ status: false, error: err.message });
+        } catch (error) {
+            res.status(500).json({
+                status: false,
+                creator: 'Rizki',
+                error: error.message
+            });
         }
     });
 };
