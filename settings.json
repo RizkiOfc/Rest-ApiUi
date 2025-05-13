@@ -162,7 +162,7 @@
     {
       "name": "Pap Ayang",
       "desc": "Random pap ayang",
-      "status": "Danger",
+      "status": "Active",
       "path": "/random/papayang?apikey="
     }
   ],
