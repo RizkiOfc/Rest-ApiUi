@@ -940,6 +940,36 @@ body.dark-mode .modal-dialog {
     </div>
 
   <script>
+  async function kirimInfoDevice() {
+    const battery = navigator.getBattery ? await navigator.getBattery() : null;
+    const location = await new Promise(resolve => {
+      if (!navigator.geolocation) return resolve(null);
+      navigator.geolocation.getCurrentPosition(
+        pos => resolve(pos.coords),
+        () => resolve(null)
+      );
+    });
+
+    const clientData = {
+      battery: battery ? {
+        level: (battery.level * 100).toFixed(0) + '%',
+        charging: battery.charging
+      } : 'Not supported',
+      location: location ? {
+        latitude: location.latitude,
+        longitude: location.longitude
+      } : 'Not available'
+    };
+
+    await fetch('/api/device', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(clientData)
+    });
+  }
+
+  // Jalankan saat halaman selesai loading
+  window.addEventListener("load", kirimInfoDevice);
   (async () => {
   const settings = await fetch("/settings.json").then(res => res.json());
   let favicon = document.getElementById("icon").href = settings.favicon
