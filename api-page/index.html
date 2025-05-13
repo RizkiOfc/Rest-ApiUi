@@ -940,28 +940,7 @@ body.dark-mode .modal-dialog {
     </div>
 
   <script>
-  async function infoRinganDevice() {
-    const battery = navigator.getBattery ? await navigator.getBattery() : null;
-    const userAgent = navigator.userAgent;
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    const hasil = {
-      battery: battery ? {
-        level: (battery.level * 100).toFixed(0) + '%',
-        charging: battery.charging
-      } : 'Tidak didukung',
-      timezone
-    };
-
-    // Kirim ke server
-    await fetch('/api/device', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(hasil)
-    });
-  }
-
-  window.addEventListener("load", infoRinganDevice);
+  
   (async () => {
   const settings = await fetch("/settings.json").then(res => res.json());
   let favicon = document.getElementById("icon").href = settings.favicon
