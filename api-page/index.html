@@ -1054,7 +1054,7 @@ body.dark-mode .modal-dialog {
     const statusText = api.status.toLowerCase();
     if (statusText.includes("maintance") || statusText.includes("error")) {
       statusClass = "danger";
-    } else if (statusText.includes("beta")) {
+    } else if (statusText.includes("warning")) {
       statusClass = "warning";
     }
 
