@@ -68,6 +68,12 @@
       "path": "/download/tiktok-v2?apikey=&url="
     },
     {
+      "name": "Doodstream",
+      "desc": "Downloader doodstream",
+      "status": "Active",
+      "path": "/download/doods?apikey=&url="
+    },
+    {
       "name": "Capcut",
       "desc": "Downloader capcut",
       "status": "Active",
