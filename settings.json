@@ -344,7 +344,7 @@
     {
       "name": "Bratvid",
       "desc": "Brat Video",
-      "status": "Error",
+      "status": "Active",
       "path": "/imagecreator/bratvid?apikey=&text="
         }
   ],
