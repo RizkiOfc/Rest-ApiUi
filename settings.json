@@ -311,6 +311,12 @@
       "status": "Active",
       "path": "/imagecreator/removebg?apikey=&url="
     },
+     {
+      "name": "Pornhub",
+      "desc": "Pornhub image",
+      "status": "Active",
+      "path": "/imagecreator/pornhub?apikey=&url="
+    },
     {
       "name": "Upscale",
       "desc": "Upscale image",
