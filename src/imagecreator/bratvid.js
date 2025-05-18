@@ -23,7 +23,8 @@ module.exports = function (app) {
             });
 
             res.setHeader('Content-Type', 'video/mp4');
-            res.setHeader('Content-Disposition', `inline; filename="bratvid.mp4"`);
+res.setHeader('Content-Disposition', 'inline; filename="bratvid.mp4"');
+res.send(response.data); // buffer dari axios
 
             response.data.pipe(res);
         } catch (err) {
