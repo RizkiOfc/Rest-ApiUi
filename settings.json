@@ -192,12 +192,6 @@
       "path": "/search/tiktok?apikey=&q="
     },
     {
-      "name": "Halodoc",
-      "desc": "Halodoc search",
-      "status": "Active",
-      "path": "/search/halodoc?apikey=&query="
-    },
-    {
       "name": "Itch",
       "desc": "Itch search",
       "status": "Active",
