@@ -25,11 +25,11 @@ async function halodoc(query) {
 module.exports = function (app) {
     app.get('/search/halodoc', async (req, res) => {
         try {
-            const { apikey, q } = req.query;
+            const { apikey, query } = req.query;
             if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' });
-            if (!q) return res.json({ status: false, error: 'Parameter `q` wajib diisi' });
+            if (!query) return res.json({ status: false, error: 'Parameter `q` wajib diisi' });
 
-            const result = await halodoc(q);
+            const result = await halodoc(query);
 
             if (!result.length) {
                 return res.json({ status: false, message: 'Tidak ada artikel ditemukan' });
