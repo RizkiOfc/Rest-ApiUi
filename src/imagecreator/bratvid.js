@@ -1,9 +1,10 @@
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = function (app) {
-    app.get('/imagecreator/bratvid', async (req, res) => {
+    app.get('/video/bratvid', async (req, res) => {
         try {
             const { apikey, text } = req.query;
+
             if (!global.apikey.includes(apikey)) {
                 return res.json({ status: false, error: 'Apikey invalid' });
             }
@@ -12,16 +13,19 @@ module.exports = function (app) {
                 return res.json({ status: false, error: 'Parameter `text` wajib diisi' });
             }
 
-            const response = await axios.get(`https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`, {
-                responseType: 'arraybuffer',
+            const videoUrl = `https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`;
+
+            const response = await axios.get(videoUrl, {
+                responseType: 'stream',
                 headers: {
                     'User-Agent': 'Mozilla/5.0'
                 }
             });
 
             res.setHeader('Content-Type', 'video/mp4');
-            res.setHeader('Content-Disposition', 'inline; filename="bratvid.mp4"');
-            res.send(response.data);
+            res.setHeader('Content-Disposition', `inline; filename="bratvid.mp4"`);
+
+            response.data.pipe(res);
         } catch (err) {
             res.status(500).json({
                 status: false,
