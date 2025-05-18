@@ -57,12 +57,13 @@ module.exports = function (app) {
             if (!text1 || !text2) return res.json({ status: false, error: 'Parameter `text1` dan `text2` wajib diisi' });
 
             const imageUrl = await ephoto(text1, text2);
-
-            res.status(200).json({
-                status: true,
-                creator: global.creator || 'Rizki',
-                result: imageUrl
+            const imageBuffer = await axios.get(imageUrl, {
+                responseType: 'arraybuffer'
             });
+
+            res.setHeader('Content-Type', 'image/png');
+            res.setHeader('Content-Disposition', 'inline; filename="pornhub.png"');
+            res.send(imageBuffer.data);
         } catch (err) {
             res.status(500).json({
                 status: false,
