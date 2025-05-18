@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 module.exports = function (app) {
-    app.get('/video/bratvid', async (req, res) => {
+    app.get('/imagecreator/bratvid', async (req, res) => {
         try {
             const { apikey, text } = req.query;
 
