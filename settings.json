@@ -68,6 +68,12 @@
       "path": "/download/tiktok-v2?apikey=&url="
     },
     {
+      "name": "SoundCloud",
+      "desc": "Downloader soundcloud",
+      "status": "Active",
+      "path": "/download/soundcloud?apikey=&url="
+    },
+    {
       "name": "Doodstream",
       "desc": "Downloader doodstream",
       "status": "Active",
