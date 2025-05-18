@@ -204,6 +204,12 @@
       "path": "/search/bingimg?apikey=&q="
     },
     {
+      "name": "Halodoc",
+      "desc": "Halodoc search",
+      "status": "Active",
+      "path": "/search/halodoc?apikey=&query="
+    },
+    {
       "name": "Npm Search",
       "desc": "Search npm nodejs",
       "status": "Active",
