@@ -195,7 +195,7 @@
       "name": "Halodoc",
       "desc": "Halodoc search",
       "status": "Active",
-      "path": "/download/halodoc?apikey=&url="
+      "path": "/download/halodoc?apikey=&query="
     },
     {
       "name": "Itch",
