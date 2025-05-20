@@ -13,15 +13,23 @@ module.exports = function (app) {
                 return res.status(400).json({ status: false, error: 'Parameter `username`, `caption`, dan `photo` wajib diisi' });
             }
 
+            // 1. Panggil API Velyn untuk dapatkan link gambar
             const apiUrl = `https://velyn.biz.id/api/maker/igstory?username=${encodeURIComponent(username)}&caption=${encodeURIComponent(caption)}&photo=${encodeURIComponent(photo)}&APIKEY=velyn`;
+            const { data } = await axios.get(apiUrl);
 
-            const response = await axios.get(apiUrl, {
+            if (!data || !data.result) {
+                return res.status(500).json({ status: false, error: 'Gagal mengambil link hasil dari API Velyn' });
+            }
+
+            // 2. Ambil buffer dari link gambar
+            const imgRes = await axios.get(data.result, {
                 responseType: 'arraybuffer'
             });
 
             res.setHeader('Content-Type', 'image/jpeg');
             res.setHeader('Content-Disposition', 'inline; filename="igstory.jpg"');
-            res.send(response.data);
+            res.send(imgRes.data);
+
         } catch (err) {
             res.status(500).json({
                 status: false,
