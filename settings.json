@@ -277,7 +277,7 @@
       "name": "Instagram Stalk",
       "desc": "Stalk instagram account",
       "status": "Active",
-      "path": "/stalk/instagram?apikey=&user="
+      "path": "/stalk/igstory?apikey=&user="
     },
     {
       "name": "Bmkg",
