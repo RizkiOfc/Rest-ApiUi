@@ -277,7 +277,7 @@
       "name": "Instagram Stalk",
       "desc": "Stalk instagram account",
       "status": "Active",
-      "path": "/stalk/igstory?apikey=&user="
+      "path": "/stalk/instagram?apikey=&user="
     },
     {
       "name": "Bmkg",
@@ -333,7 +333,7 @@
       "name": "Instagram Story",
       "desc": "Fake Instagram Story",
       "status": "Active",
-      "path": "/imagecreator/upscale?apikey=&username=&caption=&photo="
+      "path": "/imagecreator/igstory?apikey=&username=&caption=&photo="
     },
     {
       "name": "Colorize",
