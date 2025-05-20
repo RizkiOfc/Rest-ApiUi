@@ -336,6 +336,12 @@
       "path": "/imagecreator/colorize?apikey=&url="
     },
     {
+      "name": "Instagram Story",
+      "desc": "Fake Instagram Story",
+      "status": "Active",
+      "path": "/imagecreator/igstory?apikey=&username=&caption=&photo="
+    },
+    {
       "name": "Brat",
       "desc": "Brat text generator",
       "status": "Active",
