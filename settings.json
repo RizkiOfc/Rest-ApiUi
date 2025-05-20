@@ -330,12 +330,6 @@
       "path": "/imagecreator/upscale?apikey=&url="
     },
     {
-      "name": "Instagram Story",
-      "desc": "Fake Instagram Story",
-      "status": "Active",
-      "path": "/imagecreator/igstory?apikey=&username=&caption=&photo="
-    },
-    {
       "name": "Colorize",
       "desc": "Colorize image",
       "status": "Active",
