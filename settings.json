@@ -324,12 +324,6 @@
       "path": "/imagecreator/pornhub?apikey=&text1=&text2="
     },
     {
-      "name": "Instagram Story",
-      "desc": "Fake Instagram Story",
-      "status": "Active",
-      "path": "/imagecreator/igstory?apikey=&username=&caption=&photo="
-    },
-    {
       "name": "Upscale",
       "desc": "Upscale image",
       "status": "Active",
