@@ -11,6 +11,9 @@
     "rizkinew",
     "rizki#"
   ], 
+  "apikeyprem": [
+    "admin#333"
+  ],
   "endpoints": {
   "openai": [
     {
@@ -258,6 +261,12 @@
       "desc": "Screenshot web url",
       "status": "Active",
       "path": "/tools/ssweb?apikey=&url="
+    },
+    {
+      "name": "Nik Parser",
+      "desc": "Check Nik",
+      "status": "Active",
+      "path": "/tools/nik-parser?apikey=&query="
     },
     {
       "name": "Emoji To Gif",
