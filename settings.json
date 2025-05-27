@@ -266,7 +266,7 @@
       "name": "Nik Parser",
       "desc": "Check Nik",
       "status": "Active",
-      "path": "/tools/nik-parser?apikey=&query="
+      "path": "/tools/nik-parser?apikey=&nik="
     },
     {
       "name": "Emoji To Gif",
