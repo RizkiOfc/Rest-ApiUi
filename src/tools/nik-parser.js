@@ -15,16 +15,18 @@ async function Nik(nik) {
   const uniqcode = nikk.uniqcode();
 
   return {
-    valid: valid,
-    provinsi: province,
-    provinsiId: provinceId,
-    kabupatenId: kabupatenKotaId,
-    kabupaten: kabupatenKota,
-    kecamatan: kecamatan,
-    kecamatanId: kecamatanId,
-    kodepos: kodepos,
-    lahir: lahir,
-    uniqcode: uniqcode
+    result.push({
+      valid,
+      provinceId,
+      province,
+      kabupatenKotaId,
+      kabupatenKota,
+      kecamatanId,
+      kecamatan,
+      kodepos,
+      lahir,
+      uniqcode
+    })
   }
 }
 
