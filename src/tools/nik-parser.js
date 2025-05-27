@@ -1,7 +1,7 @@
 const { nikParser } = require("nik-parser");
 
-async function Nik(nik) {
-  const nikk = nikParser(nik);
+async function Nik(query) {
+  const nikk = nikParser(query);
 
   const valid = nikk.isValid();
   const provinceId = nikk.provinceId();
