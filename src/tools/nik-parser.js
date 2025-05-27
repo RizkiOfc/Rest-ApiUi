@@ -1,7 +1,9 @@
 const { nikParser } = require("nik-parser");
 
-async function Nik(query) {
-  const nikk = nikParser(query);
+async function Nik(nik) {
+  const nikk = nikParser(nik);
+
+  let result = [];
 
   const valid = nikk.isValid();
   const provinceId = nikk.provinceId();
@@ -31,7 +33,7 @@ async function Nik(query) {
 module.exports = function(app) {
 app.get('/tools/nik-parser', async (req, res) => {
        const { apikey, query } = req.query
-       if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })
+       if (!global.apikeyprem.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })
         try {
             let anu = await Nik(query)
             res.status(200).json({
