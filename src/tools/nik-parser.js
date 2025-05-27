@@ -14,7 +14,6 @@ async function Nik(nik) {
   const lahir = nikk.lahir();
   const uniqcode = nikk.uniqcode();
 
-  return {
     result.push({
       valid,
       provinceId,
@@ -28,12 +27,11 @@ async function Nik(nik) {
       uniqcode
     })
   }
-}
 
 module.exports = function(app) {
   app.get('/tools/nik-parser', async (req, res) => {
     const { apikey, nik } = req.query;
-    if(!global.apikey.includes(apikey)) return res.json({status: false, error: "Apikey invalid"});
+    if(!global.apikeyprem.includes(apikey)) return res.json({status: false, error: "Apikey invalid"});
     try {
       let anu = await Nik(nik);
       res.status(200).json({
