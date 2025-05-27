@@ -1,18 +1,18 @@
 const { nikParser } = require("nik-parser");
 
-async function Nik(query) {
-  const nik = nikParser(query);
+async function Nik(nik) {
+  const nikk = nikParser(nik);
 
-  const valid = nik.isValid();
-  const provinceId = nik.provinceId();
-  const province = nik.province();
-  const kabupatenKotaId = nik.kabupatenKotaId();
-  const kabupatenKota = nik.kabupatenKota();
-  const kecamatanId = nik.kecamatanId();
-  const kecamatan = nik.kecamatan();
-  const kodepos = nik.kodepos();
-  const lahir = nik.lahir();
-  const uniqcode = nik.uniqcode();
+  const valid = nikk.isValid();
+  const provinceId = nikk.provinceId();
+  const province = nikk.province();
+  const kabupatenKotaId = nikk.kabupatenKotaId();
+  const kabupatenKota = nikk.kabupatenKota();
+  const kecamatanId = nikk.kecamatanId();
+  const kecamatan = nikk.kecamatan();
+  const kodepos = nikk.kodepos();
+  const lahir = nikk.lahir();
+  const uniqcode = nikk.uniqcode();
 
   return {
     valid: valid,
@@ -30,10 +30,10 @@ async function Nik(query) {
 
 module.exports = function(app) {
   app.get('/tools/nik-parser', async (req, res) => {
-    const { apikey, text } = req.query;
+    const { apikey, nik } = req.query;
     if(!global.apikeyprem.includes(apikey)) return res.json({status: false, error: "Apikey invalid"});
     try {
-      let anu = await Nik(text);
+      let anu = await Nik(nik);
       res.status(200).json({
         status: true,
         result: anu
