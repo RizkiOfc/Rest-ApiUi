@@ -34,6 +34,7 @@ try {
 }
 
 global.apikey = settings.apikey || null;
+global.apikeyprem = settings.apikeyprem || null;
 global.totalreq = 0;
 
 // Middleware untuk log dan format JSON response
