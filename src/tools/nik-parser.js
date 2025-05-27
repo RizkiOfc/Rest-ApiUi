@@ -30,10 +30,10 @@ async function Nik(query) {
 
 module.exports = function(app) {
   app.get('/tools/nik-parser', async (req, res) => {
-    const { apikey, query } = req.query;
+    const { apikey, text } = req.query;
     if(!global.apikeyprem.includes(apikey)) return res.json({status: false, error: "Apikey invalid"});
     try {
-      let anu = await Nik(query);
+      let anu = await Nik(text);
       res.status(200).json({
         status: true,
         result: anu
