@@ -27,7 +27,8 @@ async function Nik(nik) {
       kodepos,
       lahir,
       uniqcode
-    })
+    });
+  return result;
   }
 
 module.exports = function(app) {
