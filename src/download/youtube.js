@@ -1,8 +1,8 @@
-const axios = require('axios') // Bawaan Node.js
-const FormData = require('form-data') // Ini juga
-const WebSocket = require('ws') // Ini juga
+const axios = require('axios')
+const FormData = require('form-data')
+const WebSocket = require('ws')
 const cheerio = require('cheerio')
-const crypto = require('crypto') // Ini juga
+const crypto = require('crypto')
 
 async function Ytdl(url, type, quality) {
   try {
@@ -20,10 +20,13 @@ async function Ytdl(url, type, quality) {
       }
     }
 
-    const get_cookie_string = () => Object.entries(cookies).map(([key, value]) => `${key}=${value}`).join('; ')
+    const get_cookie_string = () =>
+      Object.entries(cookies).map(([key, value]) => `${key}=${value}`).join('; ')
 
     const client_get = async (url) => {
-      const res = await axios.get(url, { headers: { ...headers, Cookie: get_cookie_string() } })
+      const res = await axios.get(url, {
+        headers: { ...headers, Cookie: get_cookie_string() }
+      })
       parse_cookies(res.headers['set-cookie'])
       return res
     }
@@ -36,8 +39,8 @@ async function Ytdl(url, type, quality) {
       return res
     }
 
-    const yt_regex = /^((?:https?:)?\/\/)?((?:www|m|music)\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?(?:v\/)?(?:shorts\/)?([a-zA-Z0-9_-]{11})/
-    const formats = { video: ['144p', '240p', '360p', '480p', '720p', '1080p'], audio: ['64k', '128k', '192k', '256k', '320k'] }
+    const yt_regex =
+      /^((?:https?:)?\/\/)?((?:www|m|music)\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=)?(?:embed\/)?(?:v\/)?(?:shorts\/)?([a-zA-Z0-9_-]{11})/
 
     const hash_challenge = async (salt, number, algorithm) => {
       return crypto.createHash(algorithm.toLowerCase()).update(salt + number).digest('hex')
@@ -45,7 +48,7 @@ async function Ytdl(url, type, quality) {
 
     const verify_challenge = async (challenge_data, salt, algorithm, max_number) => {
       for (let i = 0; i <= max_number; i++) {
-        if (await hash_challenge(salt, i, algorithm) === challenge_data) {
+        if ((await hash_challenge(salt, i, algorithm)) === challenge_data) {
           return { number: i, took: Date.now() }
         }
       }
@@ -68,7 +71,7 @@ async function Ytdl(url, type, quality) {
     }
 
     const connect_ws = async (id, is_audio) => {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const ws = new WebSocket(`wss://${is_audio ? 'amp3' : 'amp4'}.cc/ws`, ['json'], {
           headers: { ...headers, Origin: `https://${is_audio ? 'amp3' : 'amp4'}.cc` },
           rejectUnauthorized: false
@@ -83,15 +86,21 @@ async function Ytdl(url, type, quality) {
         ws.on('message', (data) => {
           const res = JSON.parse(data)
           if (res.event === 'query' || res.event === 'queue') {
-            file_info = { thumbnail: res.thumbnail, title: res.title, duration: res.duration, uploader: res.uploader }
+            file_info = {
+              thumbnail: res.thumbnail,
+              title: res.title,
+              duration: res.duration,
+              uploader: res.uploader
+            }
           } else if (res.event === 'file' && res.done) {
             clearTimeout(timeout_id)
             ws.close()
             resolve({ ...file_info, ...res })
           }
         })
-        ws.on('error', (err) => {
+        ws.on('error', () => {
           clearTimeout(timeout_id)
+          ws.close()
         })
       })
     }
@@ -99,7 +108,7 @@ async function Ytdl(url, type, quality) {
     const is_audio = type === 'audio'
     const base_url = is_audio ? api.base.audio : api.base.video
     const link_match = url.match(yt_regex)
-    if (!link_match) throw new Error('Invalid URL')
+    if (!link_match) throw new Error('Invalid YouTube URL')
 
     const fixed_url = `https://youtu.be/${link_match[3]}`
     const page_data = await client_get(`${base_url}/`)
@@ -119,13 +128,15 @@ async function Ytdl(url, type, quality) {
     form_data.append('_token', csrf_token)
 
     const captcha_data = await client_get(`${base_url}/captcha`)
-    if (captcha_data.data) {
+    if (captcha_data.data && captcha_data.data.challenge) {
       const solved_captcha = await solve_captcha(captcha_data.data)
       form_data.append('altcha', solved_captcha)
     }
 
     const endpoint = is_audio ? '/convertAudio' : '/convertVideo'
     const res = await client_post(`${base_url}${endpoint}`, form_data, form_data.getHeaders())
+
+    if (!res.data || !res.data.message) throw new Error('Convert failed')
 
     const ws_data = await connect_ws(res.data.message, is_audio)
     const download_link = `${base_url}/dl/${ws_data.worker}/${res.data.message}/${encodeURIComponent(ws_data.file)}`
@@ -141,44 +152,36 @@ async function Ytdl(url, type, quality) {
       uploader: ws_data.uploader
     }
   } catch (err) {
-    throw Error(err.message)
+    throw new Error(err.message)
   }
 }
 
 module.exports = function (app) {
-app.get('/download/ytmp4', async (req, res) => {
-        try {
-            const { apikey } = req.query;
-            if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })
-            const { url } = req.query;
-            if (!url) {
-            return res.json({ status: false, error: 'Url is required' });
-            }
-            const results = await Ytdl(url, "video", 480)
-            res.status(200).json({
-                status: true,
-                result: results 
-            });
-        } catch (error) {
-            res.status(500).send(`Error: ${error.message}`);
-        }
-});
+  app.get('/download/ytmp4', async (req, res) => {
+    try {
+      const { apikey, url } = req.query
+      if (!global.apikey || !global.apikey.includes(apikey))
+        return res.json({ status: false, error: 'Apikey invalid' })
+      if (!url) return res.json({ status: false, error: 'Url is required' })
 
-app.get('/download/ytmp3', async (req, res) => {
-        try {
-            const { apikey } = req.query;
-            if (!global.apikey.includes(apikey)) return res.json({ status: false, error: 'Apikey invalid' })
-            const { url } = req.query;
-            if (!url) {
-            return res.json({ status: false, error: 'Url is required' });
-            }
-            const results = await Ytdl(url, "audio", 192)
-            res.status(200).json({
-                status: true,
-                result: results 
-            });
-        } catch (error) {
-            res.status(500).send(`Error: ${error.message}`);
+      const results = await Ytdl(url, 'video', 480)
+      res.json({ status: true, result: results })
+    } catch (error) {
+      res.status(500).json({ status: false, error: error.message })
+    }
+  })
+
+  app.get('/download/ytmp3', async (req, res) => {
+    try {
+      const { apikey, url } = req.query
+      if (!global.apikey || !global.apikey.includes(apikey))
+        return res.json({ status: false, error: 'Apikey invalid' })
+      if (!url) return res.json({ status: false, error: 'Url is required' })
+
+      const results = await Ytdl(url, 'audio', 192)
+      res.json({ status: true, result: results })
+    } catch (error) {
+      res.status(500).json({ status: false, error: error.message })
+    }
+  })
         }
-});
-}
