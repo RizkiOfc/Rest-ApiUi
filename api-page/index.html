@@ -1,240 +1,482 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to the ElrayyXml API documentation. Find what you need to integrate our services.">
-    <meta name="theme-color" content="#ffffff">
-    <title>API. Fuison</title>
+    <title>API Fusion - Home</title>
     <link rel="icon" href="/download.jpg" type="image/png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'mono': ['Ubuntu Mono', 'monospace'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        ::-webkit-scrollbar {
-            display: none !important;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-        .glass {
-            backdrop-filter: blur(16px) saturate(180%);
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.125);
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1.5rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #000000;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: #000000;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: #666666;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: #ffffff;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #333333;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #000000;
+            color: #ffffff;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #333333;
+            transform: translateY(-2px);
+        }
+        
+        /* Stats Section */
+        .stats {
+            padding: 3rem 0;
+            background: #f8f8f8;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .stat-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+        }
+        
+        .features h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #000000;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid #e5e5e5;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            border-color: #000000;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #000000;
+        }
+        
+        .feature-card p {
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        /* Getting Started */
+        .getting-started {
+            padding: 4rem 0;
+            background: #f8f8f8;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .getting-started h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #000000;
+        }
+        
+        .steps {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        
+        .step-number {
+            background: #000000;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #000000;
+        }
+        
+        .step-content p {
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: #000000;
+            color: #ffffff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #cccccc;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
-
-<body class="bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-800 antialiased font-mono min-h-screen">
-
-    <aside id="sidebar" class="fixed top-0 right-0 h-full w-64 bg-white text-slate-800 border-l border-gray-200 transform translate-x-full duration-300 ease-in-out z-[100]">
-        <div class="px-8 py-4 border-b border-gray-200 flex items-center justify-end">
-            <button id="sidebarClose" class="py-2 px-3 border border-gray-200 text-slate-800 hover:border-gray-600 flex items-center justify-center">
-                <i class="material-icons text-xl">close</i>
-            </button>
-        </div>
-        <div class="p-8">
-            <nav>
-                <div class="space-y-2">
-                    <a href="/api" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
-                        <i class="material-icons text-lg mr-3">rocket</i> API
-                    </a>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="logo-icon fas fa-code"></i>
+                    <h1>API Fusion</h1>
                 </div>
-                <p class="text-xs text-slate-700 my-4">MAIN COURSE.</p>
-                <div class="space-y-2">
-                    <a href="https://tech-upload.onrender.com" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
-                        <i class="material-icons text-lg mr-3">arrow_outward</i> Uploader
-                    </a>
-                    <a href="https://wa.me/6287794585528" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
-                        <i class="material-icons text-lg mr-3">arrow_outward</i> Feedback
-                    </a>
-                </div>
-                <p class="text-xs text-slate-700 my-4">LINKS.</p>
-                <div class="space-y-2">
-                    <a href="https://wa.me/6287794585528" target="_blank" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
-                        <i class="material-icons text-lg mr-3">arrow_outward</i> Contact
-                    </a>
-                    <a href="" target="_blank" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
-                        <i class="material-icons text-lg mr-3">arrow_outward</i> Channel
-                    </a>
-                </div>
-            </nav>
-        </div>
-    </aside>
-
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 opacity-0 invisible duration-300 ease-in-out z-[90]"></div>
-
-    <header class="glass sticky top-0 z-50 border-b border-gray-200">
-        <div class="max-w-2xl mx-auto px-8 py-4 flex items-center justify-between">
-            <div class="flex gap-4 items-center">
-                <div class="flex flex-col gap-1">
-                    <h2 class="text-lg text-gray-800 font-semibold leading-none">API Fusion</h2>
-                    <p class="text-xs text-gray-500 leading-none">API Documentation</p>
-                </div>
+                <nav class="nav-links">
+                    <a href="/" class="active">Home</a>
+                    <a href="/api">Documentation</a>
+                    <a href="https://wa.me/6287794585528">Contact</a>
+                </nav>
             </div>
-            <button id="sidebarToggle" class="py-2 px-3 text-sm border border-gray-200 text-gray-500 hover:border-gray-600 flex items-center justify-center">
-                <i class="material-icons text-xl">menu</i>
-            </button>
         </div>
     </header>
 
-    <main class="max-w-2xl mx-auto px-8 py-8">
-        
-        <img src="/1_9xsOnmz5hC4IVOLixlvMLg.webp" alt="API Banner" class="w-full h-auto mb-6">
-
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-slate-900 text-white px-6 py-4 relative overflow-hidden">
-                <div class="absolute top-0 right-0 opacity-10">
-                    <span class="material-icons text-6xl">api</span>
-                </div>
-                <div class="relative z-10">
-                    <div id="total-endpoints" class="text-2xl font-bold mb-1">...</div>
-                    <div class="text-xs text-slate-300 uppercase tracking-wide">Total Endpoints</div>
-                </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>API Fusion</h2>
+                <p>Powerful and reliable API services for your applications. Build faster with our comprehensive API endpoints.</p>
+                <a href="/api" class="cta-button">
+                    <i class="fas fa-book"></i> Explore Documentation
+                </a>
             </div>
-            </div>
+        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-    
-            <a href="/api" class="block bg-white border-2 border-slate-900 p-6 hover:bg-slate-50 transition-colors">
-                <div class="flex items-center justify-between mb-2">
-                    <h3 class="font-bold text-slate-900">API Documentation</h3>
-                    <span class="material-icons text-slate-900">data_object</span>
-                </div>
-                <p class="text-xs text-slate-600 mb-4">Explore all available endpoints and try them out live.</p>
-                <span class="flex items-center text-xs font-bold text-slate-900">
-                    Go to Docs
-                    <span class="material-icons text-sm ml-1">arrow_forward</span>
-                </span>
-            </a>
-        </div>
-
-        <div class="bg-slate-50 border border-gray-300 p-6 mb-6">
-            <h3 class="flex items-center gap-2 font-bold text-lg text-slate-900 mb-5">
-                <span class="material-icons">rocket_launch</span>
-                Getting Started
-            </h3>
-            
-            <div class="space-y-4">
-                <div class="flex items-start gap-4">
-                    <div class="bg-slate-900 text-white w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">1</div>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-sm text-slate-900 mb-1">Choose Your Category</h4>
-                        <p class="text-xs text-slate-600">Browse through available API categories on sidebar and select what you need.</p>
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div id="total-endpoints" class="stat-number">...</div>
+                        <div class="stat-label">Total Endpoints</div>
                     </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                    <div class="bg-slate-900 text-white w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">2</div>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-sm text-slate-900 mb-1">Read the Docs</h4>
-                        <p class="text-xs text-slate-600">Check endpoint parameters, response format, and example usage.</p>
+                    <div class="stat-card">
+                        <div id="total-categories" class="stat-number">...</div>
+                        <div class="stat-label">Categories</div>
                     </div>
-                </div>
-                
-                <div class="flex items-start gap-4">
-                    <div class="bg-slate-900 text-white w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">3</div>
-                    <div class="flex-1">
-                        <h4 class="font-bold text-sm text-slate-900 mb-1">Make Your Request</h4>
-                        <p class="text-xs text-slate-600">Send HTTP requests and integrate the JSON response into your app.</p>
+                    <div class="stat-card">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">v2.0</div>
+                        <div class="stat-label">Current Version</div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="flex flex-col mt-6 text-center">
-            <p class="text-slate-600 text-xs">© 2025 API Fusion. | All Rights Reserved.</p>
-        </div>
+        <section class="features">
+            <div class="container">
+                <h3>Why Choose API Fusion?</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <i class="feature-icon fas fa-rocket"></i>
+                        <h4>High Performance</h4>
+                        <p>Optimized for speed and reliability with minimal latency for all your API requests.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="feature-icon fas fa-shield-alt"></i>
+                        <h4>Secure & Protected</h4>
+                        <p>Enterprise-grade security measures to keep your data and applications safe.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="feature-icon fas fa-code"></i>
+                        <h4>Easy Integration</h4>
+                        <p>Simple RESTful API design with comprehensive documentation for quick implementation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="getting-started">
+            <div class="container">
+                <h3>Getting Started</h3>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Choose Your Category</h4>
+                            <p>Browse through available API categories and select what you need.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Read the Documentation</h4>
+                            <p>Check endpoint parameters, response format, and example usage.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Make Your Request</h4>
+                            <p>Send HTTP requests and integrate the JSON response into your app.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="/api">Documentation</a>
+                    <a href="https://tech-upload.onrender.com">Uploader</a>
+                    <a href="https://wa.me/6287794585528">Contact</a>
+                </div>
+                <div class="copyright">
+                    © 2025 API Fusion. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-    
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebarClose = document.getElementById('sidebarClose');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
+        async function loadStats() {
+            const endpointsEl = document.getElementById('total-endpoints');
+            const categoriesEl = document.getElementById('total-categories');
 
-        function openSidebar() {
-            sidebar.classList.remove('translate-x-full');
-            overlay.classList.remove('opacity-0', 'invisible');
-            document.body.classList.add('overflow-hidden');
-        }
+            try {
+                const response = await fetch('/api/stats');
+                if (!response.ok) throw new Error('API stats failed');
+                
+                const data = await response.json();
+                
+                if (endpointsEl) endpointsEl.textContent = data.totalEndpoints || 0;
+                if (categoriesEl) categoriesEl.textContent = data.totalCategories || 0;
 
-        function closeSidebar() {
-            sidebar.classList.add('translate-x-full');
-            overlay.classList.add('opacity-0', 'invisible');
-            document.body.classList.remove('overflow-hidden');
-        }
+            } catch (error) {
+                console.log('Trying fallback method...');
+                
+                try {
+                    const settingsResponse = await fetch('/settings.json');
+                    if (!settingsResponse.ok) throw new Error('Settings not found');
+                    
+                    const settings = await settingsResponse.json();
+                    let totalEndpoints = 0;
+                    const categories = Object.keys(settings.endpoints || {});
+                    
+                    categories.forEach(category => {
+                        totalEndpoints += settings.endpoints[category].length;
+                    });
 
-        sidebarToggle.addEventListener('click', openSidebar);
-        sidebarClose.addEventListener('click', closeSidebar);
-        overlay.addEventListener('click', closeSidebar);
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeSidebar();
+                    if (endpointsEl) endpointsEl.textContent = totalEndpoints;
+                    if (categoriesEl) categoriesEl.textContent = categories.length;
+                    
+                } catch (fallbackError) {
+                    console.error('All methods failed:', fallbackError);
+                    
+                    if (endpointsEl) endpointsEl.textContent = '50+';
+                    if (categoriesEl) categoriesEl.textContent = '9';
+                }
             }
-        });
-
-         async function loadStats() {
-    const endpointsEl = document.getElementById('total-endpoints');
-    const categoriesEl = document.getElementById('total-categories');
-
-    try {
-        // Priority: Ambil dari API stats
-        const response = await fetch('/api/stats');
-        if (!response.ok) throw new Error('API stats failed');
-        
-        const data = await response.json();
-        
-        if (endpointsEl) endpointsEl.textContent = data.totalEndpoints || 0;
-        if (categoriesEl) categoriesEl.textContent = data.totalCategories || 0;
-
-    } catch (error) {
-        console.log('Trying fallback method...');
-        
-        // Fallback: Hitung langsung dari settings.json
-        try {
-            const settingsResponse = await fetch('/settings.json');
-            if (!settingsResponse.ok) throw new Error('Settings not found');
-            
-            const settings = await settingsResponse.json();
-            let totalEndpoints = 0;
-            const categories = Object.keys(settings.endpoints || {});
-            
-            categories.forEach(category => {
-                totalEndpoints += settings.endpoints[category].length;
-            });
-
-            if (endpointsEl) endpointsEl.textContent = totalEndpoints;
-            if (categoriesEl) categoriesEl.textContent = categories.length;
-            
-        } catch (fallbackError) {
-            console.error('All methods failed:', fallbackError);
-            
-            // Final fallback - hardcoded count based on your settings
-            if (endpointsEl) endpointsEl.textContent = '50+'; // Approximate count
-            if (categoriesEl) categoriesEl.textContent = '9'; // Categories in your settings
         }
-    }
-                               }
+
         document.addEventListener('DOMContentLoaded', loadStats);
     </script>
 </body>
 </html>
-
