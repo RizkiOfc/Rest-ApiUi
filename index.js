@@ -73,14 +73,44 @@ fs.readdirSync(apiFolder).forEach((subfolder) => {
 console.log(chalk.bgHex('#90EE90').hex('#333').bold(' Load Complete! ✓ '));
 console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Total Routes Loaded: ${totalRoutes} `));
 
-// Home page route
+// Home page route - tampilkan home.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'api-page', 'index.html'));
+  res.sendFile(path.join(__dirname, 'api-page', 'home.html'));
 });
 
-// Docs page route
-app.get('/docs', (req, res) => {
-  res.sendFile(path.join(__dirname, 'api-page', 'index.html'));
+// API Documentation page - tampilkan api.html
+app.get('/api', (req, res) => {
+  res.sendFile(path.join(__dirname, 'api-page', 'api.html'));
+});
+
+// Monitoring page
+app.get('/monitoring', (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'All systems operational',
+    uptime: process.uptime(),
+    totalRequests: global.totalreq,
+    endpoints: totalRoutes,
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Uploader page
+app.get('/uploader', (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'Uploader service is running',
+    uploadUrl: '/api/upload'
+  });
+});
+
+// Feedback page
+app.get('/feedback', (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'Feedback system is active',
+    contact: 'https://wa.me/6289526377530'
+  });
 });
 
 // Status page route
@@ -98,22 +128,24 @@ app.get('/contact', (req, res) => {
   res.json({
     status: 'success',
     contact: {
-      email: 'support@elrapyxnl.api',
-      github: settings.github || 'https://github.com',
-      whatsapp: settings.whatsapp || 'https://wa.me'
+      whatsapp: 'https://wa.me/6289526377530',
+      channel: 'https://whatsapp.com/channel/0029Vb69z8n1dAvztHQTDu3r'
     }
   });
 });
 
+// 404 handler
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'api-page', '404.html'));
 });
 
+// 500 error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).sendFile(path.join(__dirname, 'api-page', '500.html'));
 });
 
+// Start server
 app.listen(PORT, () => {
   console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Server is running on port ${PORT} `));
 });
