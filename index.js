@@ -3,6 +3,7 @@ const chalk = require('chalk');
 const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
+const serverStartTime = Date.now();
 
 require("./function.js");
 
@@ -104,6 +105,10 @@ app.get('/uploader', (req, res) => {
   });
 });
 
+// Tambahkan di bagian atas file index.js
+
+
+// Tambahkan route untuk real-time stats
 app.get('/api/stats', (req, res) => {
     try {
         const settingsPath = path.join(__dirname, './settings.json');
@@ -117,12 +122,24 @@ app.get('/api/stats', (req, res) => {
             totalEndpoints += settings.endpoints[category].length;
         });
 
+        // Calculate uptime
+        const uptimeMs = Date.now() - serverStartTime;
+        const uptimeDays = Math.floor(uptimeMs / (1000 * 60 * 60 * 24));
+        const uptimeHours = Math.floor((uptimeMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const uptimeMinutes = Math.floor((uptimeMs % (1000 * 60 * 60)) / (1000 * 60));
+        
+        // For Vercel, we'll show current session uptime
+        const uptimeString = `${uptimeDays}d ${uptimeHours}h ${uptimeMinutes}m`;
+
         res.json({
             status: 'success',
             totalEndpoints: totalEndpoints,
             totalCategories: categories.length,
             totalRequests: global.totalreq,
-            timestamp: new Date().toISOString()
+            uptime: uptimeString,
+            uptimeMs: uptimeMs,
+            timestamp: new Date().toISOString(),
+            environment: process.env.VERCEL ? 'Vercel' : 'Local'
         });
         
     } catch (error) {
@@ -131,9 +148,21 @@ app.get('/api/stats', (req, res) => {
             status: 'error',
             totalEndpoints: 0,
             totalCategories: 0,
-            totalRequests: global.totalreq
+            totalRequests: global.totalreq,
+            uptime: '0d 0h 0m',
+            environment: process.env.VERCEL ? 'Vercel' : 'Local'
         });
     }
+});
+
+// Health check endpoint untuk monitor uptime external
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'healthy',
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString(),
+        version: '2.0'
+    });
 });
 
 // Feedback page
