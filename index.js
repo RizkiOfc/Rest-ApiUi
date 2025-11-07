@@ -4,7 +4,6 @@ const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
 
-// Import file function.js (hanya jika ada efek samping atau global)
 require("./function.js");
 
 const app = express();
@@ -13,17 +12,14 @@ const PORT = process.env.PORT || 8000;
 app.enable("trust proxy");
 app.set("json spaces", 2);
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// Static file serving
 app.use('/', express.static(path.join(__dirname, '/')));
 app.use('/', express.static(path.join(__dirname, 'api-page')));
 app.use('/src', express.static(path.join(__dirname, 'src')));
 
-// Load settings.json
 const settingsPath = path.join(__dirname, './settings.json');
 let settings = {};
 try {
@@ -37,7 +33,6 @@ global.apikey = settings.apikey || null;
 global.apikeyprem = settings.apikeyprem || null;
 global.totalreq = 0;
 
-// Middleware untuk log dan format JSON response
 app.use((req, res, next) => {
   console.log(chalk.bgHex('#FFFF99').hex('#333').bold(` Request Route: ${req.path} `));
   global.totalreq += 1;
@@ -58,7 +53,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Load dynamic routes
 let totalRoutes = 0;
 const apiFolder = path.join(__dirname, './src');
 
@@ -79,23 +73,47 @@ fs.readdirSync(apiFolder).forEach((subfolder) => {
 console.log(chalk.bgHex('#90EE90').hex('#333').bold(' Load Complete! ✓ '));
 console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Total Routes Loaded: ${totalRoutes} `));
 
-// Default home page
+// Home page route
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'api-page', 'index.html'));
 });
 
-// 404 handler
+// Docs page route
+app.get('/docs', (req, res) => {
+  res.sendFile(path.join(__dirname, 'api-page', 'index.html'));
+});
+
+// Status page route
+app.get('/status', (req, res) => {
+  res.json({
+    status: 'success',
+    message: 'All systems operational',
+    uptime: process.uptime(),
+    totalRequests: global.totalreq
+  });
+});
+
+// Contact page route
+app.get('/contact', (req, res) => {
+  res.json({
+    status: 'success',
+    contact: {
+      email: 'support@elrapyxnl.api',
+      github: settings.github || 'https://github.com',
+      whatsapp: settings.whatsapp || 'https://wa.me'
+    }
+  });
+});
+
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'api-page', '404.html'));
 });
 
-// 500 error handler
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).sendFile(path.join(__dirname, 'api-page', '500.html'));
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(chalk.bgHex('#90EE90').hex('#333').bold(` Server is running on port ${PORT} `));
 });
