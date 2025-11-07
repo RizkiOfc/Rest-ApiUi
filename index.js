@@ -100,7 +100,7 @@ app.get('/uploader', (req, res) => {
   res.json({
     status: 'success',
     message: 'Uploader service is running',
-    uploadUrl: '/api/upload'
+    uploadUrl: 'https://tech-upload.onrender.com'
   });
 });
 
@@ -109,7 +109,7 @@ app.get('/feedback', (req, res) => {
   res.json({
     status: 'success',
     message: 'Feedback system is active',
-    contact: 'https://wa.me/6289526377530'
+    contact: 'https://wa.me/6287794585528'
   });
 });
 
@@ -128,8 +128,8 @@ app.get('/contact', (req, res) => {
   res.json({
     status: 'success',
     contact: {
-      whatsapp: 'https://wa.me/6289526377530',
-      channel: 'https://whatsapp.com/channel/0029Vb69z8n1dAvztHQTDu3r'
+      whatsapp: 'https://wa.me/6287794585528',
+      channel: null
     }
   });
 });
