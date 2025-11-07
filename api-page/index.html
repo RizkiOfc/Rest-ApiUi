@@ -80,6 +80,71 @@
             transition: all 0.3s ease;
         }
         
+        /* Hero Image Section */
+        .hero-image {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .image-container {
+            display: inline-block;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .image-container:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-container:active {
+            transform: scale(0.98) rotate(-1deg);
+            transition: all 0.2s ease;
+        }
+        
+        .hero-img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            transition: transform 0.4s ease;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .zoom-icon {
+            color: white;
+            font-size: 2rem;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .image-container:hover .zoom-icon {
+            transform: scale(1);
+        }
+        
         /* Sidebar */
         .sidebar {
             position: fixed;
@@ -165,7 +230,7 @@
         
         /* Hero Section */
         .hero {
-            padding: 4rem 0;
+            padding: 2rem 0 4rem 0;
             text-align: center;
             background: #ffffff;
         }
@@ -450,6 +515,10 @@
                 width: 100%;
                 right: -100%;
             }
+            
+            .image-container:hover {
+                transform: scale(1.02) rotate(1deg);
+            }
         }
     </style>
 </head>
@@ -500,6 +569,18 @@
             </div>
         </div>
     </header>
+
+    <!-- Hero Image Section -->
+    <section class="hero-image">
+        <div class="container">
+            <div class="image-container" id="heroImage">
+                <img src="/1_9xsOnmz5hC4IVOLixlvMLg.webp" alt="API Fusion Banner" class="hero-img">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus zoom-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <main>
         <section class="hero">
@@ -612,6 +693,7 @@
         const sidebar = document.getElementById('sidebar');
         const sidebarClose = document.getElementById('sidebarClose');
         const overlay = document.getElementById('overlay');
+        const heroImage = document.getElementById('heroImage');
 
         function openSidebar() {
             sidebar.classList.add('active');
@@ -628,6 +710,21 @@
         hamburgerMenu.addEventListener('click', openSidebar);
         sidebarClose.addEventListener('click', closeSidebar);
         overlay.addEventListener('click', closeSidebar);
+
+        // Hero Image Click Effect
+        heroImage.addEventListener('click', function() {
+            // Add click animation
+            this.style.transform = 'scale(1.1) rotate(-2deg)';
+            
+            // Reset after animation
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+            
+            // Optional: Open image in new tab
+            const imgSrc = this.querySelector('img').src;
+            window.open(imgSrc, '_blank');
+        });
 
         // Close sidebar with Escape key
         document.addEventListener('keydown', function(e) {
@@ -753,3 +850,4 @@
     </script>
 </body>
 </html>
+ 
