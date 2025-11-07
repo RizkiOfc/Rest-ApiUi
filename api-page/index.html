@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -266,6 +267,18 @@
             100% { opacity: 1; }
         }
         
+        /* Loading Animation */
+        .loading-dots::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        
         /* Features Section */
         .features {
             padding: 4rem 0;
@@ -503,11 +516,11 @@
             <div class="container">
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div id="total-endpoints" class="stat-number">...</div>
+                        <div id="total-endpoints" class="stat-number loading-dots">...</div>
                         <div class="stat-label">Total Endpoints</div>
                     </div>
                     <div class="stat-card">
-                        <div id="total-categories" class="stat-number">...</div>
+                        <div id="total-categories" class="stat-number loading-dots">...</div>
                         <div class="stat-label">Categories</div>
                     </div>
                     <div class="stat-card">
@@ -518,7 +531,7 @@
                         <div class="stat-label">Uptime</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">v1.0.0</div>
+                        <div class="stat-number">v2.0</div>
                         <div class="stat-label">Current Version</div>
                     </div>
                 </div>
@@ -623,46 +636,120 @@
             }
         });
 
-        // Real-time uptime and stats management
-        let lastStatsUpdate = 0;
-        const STATS_CACHE_TIME = 30000; // 30 seconds
-
+        // Enhanced stats loading with better error handling
         async function loadStats() {
             const endpointsEl = document.getElementById('total-endpoints');
             const categoriesEl = document.getElementById('total-categories');
-            const uptimeEl = document.getElementById('uptime-display');
+
+            console.log('Loading stats...');
+
+            // Remove loading animation class
+            if (endpointsEl) endpointsEl.classList.remove('loading-dots');
+            if (categoriesEl) categoriesEl.classList.remove('loading-dots');
 
             try {
-                const response = await fetch('/api/stats');
-                if (!response.ok) throw new Error('API stats failed');
+                // Try direct settings.json first (most reliable)
+                console.log('Trying to load settings.json directly...');
+                const settingsResponse = await fetch('/settings.json');
+                if (!settingsResponse.ok) throw new Error('Settings not found');
                 
-                const data = await response.json();
+                const settings = await settingsResponse.json();
+                console.log('Settings loaded:', settings);
                 
-                if (endpointsEl) endpointsEl.textContent = data.totalEndpoints || 0;
-                if (categoriesEl) categoriesEl.textContent = data.totalCategories || 0;
+                let totalEndpoints = 0;
+                const categories = Object.keys(settings.endpoints || {});
                 
-                // Update uptime display
-                if (uptimeEl && data.uptime) {
-                    const uptimeIndicator = uptimeEl.querySelector('.uptime-indicator');
-                    uptimeEl.innerHTML = `<span class="uptime-indicator"></span>${data.uptime}`;
-                    uptimeEl.title = `Server uptime: ${data.uptime} | Last updated: ${new Date().toLocaleTimeString()}`;
+                categories.forEach(category => {
+                    totalEndpoints += settings.endpoints[category].length;
+                });
+
+                console.log('Calculated stats:', { totalEndpoints, categories: categories.length });
+
+                if (endpointsEl) {
+                    endpointsEl.textContent = totalEndpoints;
+                    endpointsEl.title = `${totalEndpoints} available endpoints`;
+                }
+                if (categoriesEl) {
+                    categoriesEl.textContent = categories.length;
+                    categoriesEl.title = `${categories.length} categories`;
                 }
 
-                lastStatsUpdate = Date.now();
-                
             } catch (error) {
-                console.log('Trying fallback method...');
+                console.log('Direct settings failed, trying API stats...', error);
                 
+                // Fallback to API stats
                 try {
-                    const settingsResponse = await fetch('/settings.json');
-                    if (!settingsResponse.ok) throw new Error('Settings not found');
+                    const response = await fetch('/api/stats');
+                    if (!response.ok) throw new Error('API stats failed');
                     
-                    const settings = await settingsResponse.json();
-                    let totalEndpoints = 0;
-                    const categories = Object.keys(settings.endpoints || {});
+                    const data = await response.json();
+                    console.log('API stats loaded:', data);
                     
-                    categories.forEach(category => {
-                        totalEndpoints += settings.endpoints[category].length;
-                    });
+                    if (endpointsEl) {
+                        endpointsEl.textContent = data.totalEndpoints || 0;
+                        endpointsEl.title = `${data.totalEndpoints || 0} available endpoints`;
+                    }
+                    if (categoriesEl) {
+                        categoriesEl.textContent = data.totalCategories || 0;
+                        categoriesEl.title = `${data.totalCategories || 0} categories`;
+                    }
+                    
+                } catch (apiError) {
+                    console.error('All methods failed:', apiError);
+                    
+                    // Final fallback - hardcoded based on typical setup
+                    if (endpointsEl) {
+                        endpointsEl.textContent = '50+';
+                        endpointsEl.title = 'Approximate endpoint count';
+                    }
+                    if (categoriesEl) {
+                        categoriesEl.textContent = '9';
+                        categoriesEl.title = 'Approximate category count';
+                    }
+                }
+            }
+        }
 
-                    if (endpointsEl) endpoi
+        // Simple health check
+        async function checkAPIHealth() {
+            const uptimeEl = document.getElementById('uptime-display');
+            if (!uptimeEl) return;
+
+            try {
+                const response = await fetch('/api/health');
+                if (response.ok) {
+                    const uptimeIndicator = uptimeEl.querySelector('.uptime-indicator');
+                    uptimeIndicator.style.background = '#22c55e'; // Green
+                    uptimeEl.title = 'API is healthy and responding';
+                }
+            } catch (error) {
+                const uptimeIndicator = uptimeEl.querySelector('.uptime-indicator');
+                uptimeIndicator.style.background = '#ef4444'; // Red
+                uptimeEl.title = 'API health check failed';
+            }
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+            
+            // Load stats immediately
+            loadStats();
+            
+            // Try health check
+            checkAPIHealth();
+            
+            // Retry stats loading after 2 seconds in case of slow connection
+            setTimeout(loadStats, 2000);
+            
+            // Auto-refresh stats every 60 seconds
+            setInterval(loadStats, 60000);
+        });
+
+        // Debug: Log any errors
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+        });
+    </script>
+</body>
+</html>
