@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to the ElrayyXml API documentation. Find what you need to integrate our services.">
+    <meta name="theme-color" content="#ffffff">
+    <title>API. Fuison</title>
+    <link rel="icon" href="/assets/icon.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['Ubuntu Mono', 'monospace'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none !important;
+        }
+        
+        .glass {
+            backdrop-filter: blur(16px) saturate(180%);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-50 via-white to-slate-100 text-slate-800 antialiased font-mono min-h-screen">
+
+    <aside id="sidebar" class="fixed top-0 right-0 h-full w-64 bg-white text-slate-800 border-l border-gray-200 transform translate-x-full duration-300 ease-in-out z-[100]">
+        <div class="px-8 py-4 border-b border-gray-200 flex items-center justify-end">
+            <button id="sidebarClose" class="py-2 px-3 border border-gray-200 text-slate-800 hover:border-gray-600 flex items-center justify-center">
+                <i class="material-icons text-xl">close</i>
+            </button>
+        </div>
+        <div class="p-8">
+            <nav>
+                <div class="space-y-2">
+                    <a href="/api" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
+                        <i class="material-icons text-lg mr-3">rocket</i> API
+                    </a>
+                </div>
+                <p class="text-xs text-slate-700 my-4">MAIN COURSE.</p>
+                <div class="space-y-2">
+                    <a href="/uploader" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
+                        <i class="material-icons text-lg mr-3">arrow_outward</i> Uploader
+                    </a>
+                    <a href="/feedback" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
+                        <i class="material-icons text-lg mr-3">arrow_outward</i> Feedback
+                    </a>
+                </div>
+                <p class="text-xs text-slate-700 my-4">LINKS.</p>
+                <div class="space-y-2">
+                    <a href="https://wa.me/6287794585528" target="_blank" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
+                        <i class="material-icons text-lg mr-3">arrow_outward</i> Contact
+                    </a>
+                    <a href="" target="_blank" class="flex items-center py-2 px-4 text-sm border border-gray-200 text-gray-600 hover:border-gray-600">
+                        <i class="material-icons text-lg mr-3">arrow_outward</i> Channel
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </aside>
+
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 opacity-0 invisible duration-300 ease-in-out z-[90]"></div>
+
+    <header class="glass sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-2xl mx-auto px-8 py-4 flex items-center justify-between">
+            <div class="flex gap-4 items-center">
+                <div class="flex flex-col gap-1">
+                    <h2 class="text-lg text-gray-800 font-semibold leading-none">API Fusion</h2>
+                    <p class="text-xs text-gray-500 leading-none">API Documentation</p>
+                </div>
+                <div class="px-3 py-1.5 bg-slate-900 text-white text-xs font-semibold">
+                v2.0
+            </div>
+            </div>
+            <button id="sidebarToggle" class="py-2 px-3 text-sm border border-gray-200 text-gray-500 hover:border-gray-600 flex items-center justify-center">
+                <i class="material-icons text-xl">menu</i>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-2xl mx-auto px-8 py-8">
+        
+        <img src="assets/image.jpg" alt="API Banner" class="w-full h-auto mb-6">
+
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-slate-900 text-white px-6 py-4 relative overflow-hidden">
+                <div class="absolute top-0 right-0 opacity-10">
+                    <span class="material-icons text-6xl">api</span>
+                </div>
+                <div class="relative z-10">
+                    <div id="total-endpoints" class="text-2xl font-bold mb-1">...</div>
+                    <div class="text-xs text-slate-300 uppercase tracking-wide">Total Endpoints</div>
+                </div>
+            </div>
+            <div class="bg-white border-2 border-slate-900 px-6 py-4 relative overflow-hidden">
+                <div class="absolute top-0 right-0 opacity-5">
+                    <span class="material-icons text-6xl">category</span>
+                </div>
+                <div class="relative z-10">
+                    <div id="total-categories" class="text-2xl font-bold text-slate-900 mb-1">...</div>
+                    <div class="text-xs text-slate-600 uppercase tracking-wide">Categories</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    
+            <a href="/api" class="block bg-white border-2 border-slate-900 p-6 hover:bg-slate-50 transition-colors">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 class="font-bold text-slate-900">API Documentation</h3>
+                    <span class="material-icons text-slate-900">data_object</span>
+                </div>
+                <p class="text-xs text-slate-600 mb-4">Explore all available endpoints and try them out live.</p>
+                <span class="flex items-center text-xs font-bold text-slate-900">
+                    Go to Docs
+                    <span class="material-icons text-sm ml-1">arrow_forward</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="bg-slate-50 border border-gray-300 p-6 mb-6">
+            <h3 class="flex items-center gap-2 font-bold text-lg text-slate-900 mb-5">
+                <span class="material-icons">rocket_launch</span>
+                Getting Started
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="flex items-start gap-4">
+                    <div class="bg-slate-900 text-white w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">1</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">Choose Your Category</h4>
+                        <p class="text-xs text-slate-600">Browse through available API categories on sidebar and select what you need.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="bg-slate-900 text-white w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">2</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">Read the Docs</h4>
+                        <p class="text-xs text-slate-600">Check endpoint parameters, response format, and example usage.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="bg-slate-900 text-white w-8 h-8 flex items-center justify-center flex-shrink-0 font-bold text-sm">3</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-sm text-slate-900 mb-1">Make Your Request</h4>
+                        <p class="text-xs text-slate-600">Send HTTP requests and integrate the JSON response into your app.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col mt-6 text-center">
+            <p class="text-slate-600 text-xs">© 2025 API Fusion. | All Rights Reserved.</p>
+        </div>
+    </main>
+
+    <script>
+    
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function openSidebar() {
+            sidebar.classList.remove('translate-x-full');
+            overlay.classList.remove('opacity-0', 'invisible');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.add('translate-x-full');
+            overlay.classList.add('opacity-0', 'invisible');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        sidebarToggle.addEventListener('click', openSidebar);
+        sidebarClose.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeSidebar();
+            }
+        });
+
+        async function loadStats() {
+            const endpointsEl = document.getElementById('total-endpoints');
+            const categoriesEl = document.getElementById('total-categories');
+
+            try {
+                const response = await fetch('/assets/openapi.json');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                const categoryCount = data.tags ? data.tags.length : 0;
+                let endpointCount = 0;
+                if (data.paths) {
+                    Object.values(data.paths).forEach(pathItem => {
+                        endpointCount += Object.keys(pathItem).length;
+                    });
+                }
+
+                if (endpointsEl) endpointsEl.textContent = endpointCount;
+                if (categoriesEl) categoriesEl.textContent = categoryCount;
+
+            } catch (error) {
+                console.error('Failed to load API stats:', error);
+                if (endpointsEl) endpointsEl.textContent = 'N/A';
+                if (categoriesEl) categoriesEl.textContent = 'N/A';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadStats);
+    </script>
+</body>
+</html>
+
