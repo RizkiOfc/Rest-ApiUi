@@ -104,6 +104,38 @@ app.get('/uploader', (req, res) => {
   });
 });
 
+app.get('/api/stats', (req, res) => {
+    try {
+        const settingsPath = path.join(__dirname, './settings.json');
+        const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
+        
+        let totalEndpoints = 0;
+        const categories = Object.keys(settings.endpoints || {});
+        
+        // Hitung total endpoints
+        categories.forEach(category => {
+            totalEndpoints += settings.endpoints[category].length;
+        });
+
+        res.json({
+            status: 'success',
+            totalEndpoints: totalEndpoints,
+            totalCategories: categories.length,
+            totalRequests: global.totalreq,
+            timestamp: new Date().toISOString()
+        });
+        
+    } catch (error) {
+        console.error('Error loading stats:', error);
+        res.json({
+            status: 'error',
+            totalEndpoints: 0,
+            totalCategories: 0,
+            totalRequests: global.totalreq
+        });
+    }
+});
+
 // Feedback page
 app.get('/feedback', (req, res) => {
   res.json({
