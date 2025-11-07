@@ -1,15 +1,277 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link id="icon" rel="icon" href="" type="image/png">  
-  <title id="page"></title>
+  <title id="page">ElrapyXnL API - Home</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-  /* ===== Loading Screen Styles ===== */
+  #home-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 100%);
+    color: #f8f9fa;
+  }
+
+  .home-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .home-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .home-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .home-logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #3a86ff, #8338ec);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .logo-icon {
+    font-size: 2rem;
+    color: #3a86ff;
+  }
+
+  .home-nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .home-nav-links a {
+    color: #f8f9fa;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+  }
+
+  .home-nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .home-nav-links a.active {
+    background-color: #3a86ff;
+    color: white;
+  }
+
+  .home-hero {
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(58, 134, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(131, 56, 236, 0.1) 0%, transparent 50%);
+    z-index: 0;
+  }
+
+  .home-hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-hero h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, #3a86ff, #8338ec);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .home-hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .home-cta-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #3a86ff, #8338ec);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+  }
+
+  .home-cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(58, 134, 255, 0.4);
+  }
+
+  .home-stats-section {
+    padding: 4rem 2rem;
+    background-color: #0f1419;
+  }
+
+  .home-stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .home-stat-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .home-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .home-stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #3a86ff;
+    margin-bottom: 0.5rem;
+  }
+
+  .home-stat-label {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .home-features-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #0f1419 0%, #1a1a2e 100%);
+  }
+
+  .home-features-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .home-feature-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .home-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .home-feature-icon {
+    font-size: 2.5rem;
+    color: #3a86ff;
+    margin-bottom: 1rem;
+  }
+
+  .home-feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+  }
+
+  .home-feature-card p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .home-footer {
+    background: #1a1a2e;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .home-footer p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .home-contact {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .home-contact a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .home-contact a:hover {
+    color: white;
+    background: #3a86ff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .home-nav-links {
+      gap: 1rem;
+    }
+    
+    .home-hero h2 {
+      font-size: 2.2rem;
+    }
+    
+    .home-hero p {
+      font-size: 1rem;
+    }
+  }
+
   #loading-screen {
     position: fixed;
     top: 0;
@@ -116,7 +378,6 @@ body.dark-mode .modal-dialog {
 
     .teks-peringatan {
       flex-grow: 1;
-      /* allow line breaks */
       word-break: break-word;
     }
 
@@ -234,7 +495,6 @@ body.dark-mode .modal-dialog {
     font-family: 'Poppins', serif;
   }
 
-  /* ===== Form Styles ===== */
   .modal-body form label {
     display: block;
     font-weight: 500;
@@ -322,7 +582,6 @@ body.dark-mode .modal-dialog {
     -webkit-text-fill-color: transparent;
   }
 
-  /* ===== Modal Styles ===== */
   .modal {
     position: fixed;
     top: 0;
@@ -406,7 +665,6 @@ body.dark-mode .modal-dialog {
     background: var(--lighter-gray);
   }
 
-  /* ===== Modal Body Content ===== */
   .modal-body {
     padding: 0.5rem 0;
   }
@@ -496,7 +754,6 @@ body.dark-mode .modal-dialog {
     box-shadow: var(--shadow-sm);
   }
 
-  /* ===== Page Sections ===== */
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -538,7 +795,6 @@ body.dark-mode .modal-dialog {
     font-family: 'Poppins', serif;
   }
 
-  /* ===== Stats ===== */
   .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -582,7 +838,6 @@ body.dark-mode .modal-dialog {
     font-weight: 500;
   }
 
-  /* ===== Tabs ===== */
   .tabs {
     display: flex;
     gap: 1rem;
@@ -628,7 +883,6 @@ body.dark-mode .modal-dialog {
     width: 100%;
   }
 
-  /* ===== API Card Animations ===== */
   .api-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -636,7 +890,6 @@ body.dark-mode .modal-dialog {
     margin-bottom: 4rem;
   }
 
-  /* ===== API Cards ===== */
   .api-card {
     background: var(--card-bg);
     padding: 0.8rem;
@@ -810,7 +1063,6 @@ body.dark-mode .modal-dialog {
     box-shadow: var(--shadow);
   }
 
-  /* ===== Animations ===== */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -826,7 +1078,6 @@ body.dark-mode .modal-dialog {
     animation: fadeInUp 0.6s ease forwards;
   }
 
-  /* ===== Responsive ===== */
   @media (max-width: 768px) {
     body {
       padding: 1rem;
@@ -865,13 +1116,97 @@ body.dark-mode .modal-dialog {
   </style>
 </head>
 <body>
+  <!-- Home Page -->
+  <div id="home-page">
+    <header class="home-header">
+      <nav class="home-nav">
+        <div class="home-logo">
+          <i class="logo-icon fas fa-code"></i>
+          <h1>ElrapyXnL API</h1>
+        </div>
+        <div class="home-nav-links">
+          <a href="#" class="active">Home</a>
+          <a href="/docs">API Docs</a>
+          <a href="/status">Status</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="home-hero">
+      <div class="home-hero-content">
+        <h2>ElrapyXnL REST API</h2>
+        <p>Powerful and reliable API services for your applications. Build faster with our comprehensive API endpoints.</p>
+        <a href="/docs" class="home-cta-button">
+          <i class="fas fa-book"></i> Explore Documentation
+        </a>
+      </div>
+    </section>
+
+    <section class="home-stats-section">
+      <div class="home-stats-container">
+        <div class="home-stat-card">
+          <div class="home-stat-number">141</div>
+          <div class="home-stat-label">Total Endpoints</div>
+        </div>
+        <div class="home-stat-card">
+          <div class="home-stat-number">13</div>
+          <div class="home-stat-label">Categories</div>
+        </div>
+        <div class="home-stat-card">
+          <div class="home-stat-number">99.9%</div>
+          <div class="home-stat-label">Uptime</div>
+        </div>
+        <div class="home-stat-card">
+          <div class="home-stat-number">v2.0</div>
+          <div class="home-stat-label">Current Version</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-features-section">
+      <div class="home-features-container">
+        <div class="home-feature-card">
+          <i class="home-feature-icon fas fa-rocket"></i>
+          <h3>High Performance</h3>
+          <p>Optimized for speed and reliability with minimal latency for all your API requests.</p>
+        </div>
+        <div class="home-feature-card">
+          <i class="home-feature-icon fas fa-shield-alt"></i>
+          <h3>Secure & Protected</h3>
+          <p>Enterprise-grade security measures to keep your data and applications safe.</p>
+        </div>
+        <div class="home-feature-card">
+          <i class="home-feature-icon fas fa-code"></i>
+          <h3>Easy Integration</h3>
+          <p>Simple RESTful API design with comprehensive documentation for quick implementation.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="home-footer">
+      <p>&copy; 2025 ElrapyXnL API. All rights reserved.</p>
+      <div class="home-contact">
+        <a href="https://github.com" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://wa.me" target="_blank" title="WhatsApp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" title="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </footer>
+  </div>
+
   <!-- Loading Screen -->
   <div id="loading-screen">
     <div class="loading-spinner-large"></div>
     <div class="loading-text">Loading ...</div>
   </div>
 
-  <div class="container">
+  <div class="container" style="display: none;">
     <div style="text-align: right; margin-bottom: 1rem;">
   <button id="themeToggle" style="padding: 8px 16px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; background: var(--darker); color: white; box-shadow: var(--shadow);">
     <i id="themeIcon" class="fas fa-moon"></i>
@@ -915,7 +1250,7 @@ body.dark-mode .modal-dialog {
     </div>
   </div>
 
-  <footer class="footer">
+  <footer class="footer" style="display: none;">
     <div id="credits"></div>
     <div class="contact">
       <a id="githubLink" target="_blank" title="GitHub">
@@ -940,29 +1275,62 @@ body.dark-mode .modal-dialog {
     </div>
 
   <script>
-  
+  // Show home page initially
+  document.addEventListener('DOMContentLoaded', function() {
+    // Hide the docs content initially
+    document.querySelector('.container').style.display = 'none';
+    document.querySelector('.footer').style.display = 'none';
+    
+    // Show home page
+    document.getElementById('home-page').style.display = 'block';
+    
+    // Hide loading screen after delay
+    setTimeout(() => {
+      document.getElementById('loading-screen').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('loading-screen').style.display = 'none';
+      }, 500);
+    }, 1000);
+  });
+
+  // Navigation functionality
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('.home-nav-links a')) {
+      e.preventDefault();
+      const target = e.target.getAttribute('href');
+      
+      if (target === '/docs') {
+        // Switch to documentation page
+        document.getElementById('home-page').style.display = 'none';
+        document.querySelector('.container').style.display = 'block';
+        document.querySelector('.footer').style.display = 'block';
+        
+        // Load documentation settings
+        loadSettings();
+      } else if (target === '/status') {
+        alert('Service Status: All Systems Operational');
+      } else if (target === '/contact') {
+        alert('Contact: support@elrapyxnl.api');
+      } else {
+        // Home link - already on home page
+        document.getElementById('home-page').style.display = 'block';
+        document.querySelector('.container').style.display = 'none';
+        document.querySelector('.footer').style.display = 'none';
+      }
+      
+      // Update active nav link
+      document.querySelectorAll('.home-nav-links a').forEach(link => {
+        link.classList.remove('active');
+      });
+      e.target.classList.add('active');
+    }
+  });
+
+  // Rest of your existing JavaScript code for documentation...
   (async () => {
   const settings = await fetch("/settings.json").then(res => res.json());
   let favicon = document.getElementById("icon").href = settings.favicon
   })()
-  
-    document.addEventListener('DOMContentLoaded', function() {
-      // Hide the main content initially
-      document.querySelector('.container').style.display = 'none';
-      document.querySelector('footer').style.display = 'none';
-      
-      // Load settings and then hide loading screen
-      loadSettings().then(() => {
-        setTimeout(() => {
-          document.getElementById('loading-screen').style.opacity = '0';
-          setTimeout(() => {
-            document.getElementById('loading-screen').style.display = 'none';
-            document.querySelector('.container').style.display = 'block';
-            document.querySelector('footer').style.display = 'block';
-          }, 500);
-        }, 1000);
-      });
-    });
 
     async function loadSettings() {
       const tabsContainer = document.getElementById("tabs");
@@ -994,47 +1362,28 @@ body.dark-mode .modal-dialog {
         tabsContainer.appendChild(button);
       });
 
-      /**
- * JavaScript to automatically hide a warning box after 10 seconds with fade out animation.
- * 
- * Assumes:
- * - Warning container has id="peringatanBox"
- * - Fade out animation named 'fadeOutUp' defined in CSS
- * - Close button optionally with id="tutupPeringatan"
- */
-
-(function() {
+      (function() {
   const peringatanBox = document.getElementById('peringatanBox');
   const tombolTutup = document.getElementById('tutupPeringatan');
 
   if (!peringatanBox) return;
 
   function closeWarning() {
-    // Apply fade out animation
     peringatanBox.style.animation = 'fadeOutUp 0.4s ease forwards';
-    // After animation ends, hide the element
     peringatanBox.addEventListener('animationend', () => {
       peringatanBox.style.display = 'none';
     }, { once: true });
   }
 
-  // Attach click event to close button if exists
   if (tombolTutup) {
     tombolTutup.addEventListener('click', closeWarning);
   }
 
-  // Auto close after 10 seconds (10000 ms)
   setTimeout(closeWarning, 5000);
 })();
 
-    
-      // Render API cards
-      
-
-      // Initial render
       renderAPIs(Object.keys(apis)[0]);
 
-      // Tab click event
       tabsContainer.addEventListener("click", (e) => {
         if (e.target.classList.contains("tab")) {
           document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
@@ -1049,7 +1398,6 @@ body.dark-mode .modal-dialog {
     const card = document.createElement("div");
     card.className = "api-card";
 
-    // Tentukan class status berdasarkan teks
     let statusClass = "";
     const statusText = api.status.toLowerCase();
     if (statusText.includes("maintance") || statusText.includes("error")) {
@@ -1058,7 +1406,6 @@ body.dark-mode .modal-dialog {
       statusClass = "warning";
     }
 
-    // Ubah huruf awal jadi kapital
     const statusTextFormatted = api.status.charAt(0).toUpperCase() + api.status.slice(1).toLowerCase();
 
     card.innerHTML = `
@@ -1074,16 +1421,13 @@ body.dark-mode .modal-dialog {
 
     apiList.appendChild(card);
 
-    // Animasi masuk
     setTimeout(() => {
       card.style.animation = `cardEntrance 0.6s ease-out ${i * 0.1}s forwards`;
     }, 10);
   });
     }
 
-      // Event listeners
       document.addEventListener("click", (e) => {
-        // Play button click
         if (e.target.closest(".play-button")) {
           const btn = e.target.closest(".play-button");
           const endpoint = btn.getAttribute("data-endpoint");
@@ -1094,7 +1438,6 @@ body.dark-mode .modal-dialog {
           const submitBtn = document.getElementById("submitParamBtn");
           const modal = document.getElementById("apiResponseModal");
 
-          // Reset modal state
           document.getElementById("apiResponseContent").textContent = "";
           document.getElementById("apiResponseContent").classList.add("d-none");
           document.getElementById("apiResponseLoading").style.display = "none";
@@ -1107,7 +1450,6 @@ body.dark-mode .modal-dialog {
           document.querySelector(".modal-dialog h5").innerText = api;
           document.querySelector(".modal-dialog span").innerText = desc;
 
-          // Check if endpoint has parameters
           if (endpoint.includes("?")) {
             const queryParams = endpoint.split("?")[1].split("&");
 
@@ -1121,7 +1463,6 @@ body.dark-mode .modal-dialog {
 
             submitBtn.style.display = "block";
           } else {
-            // If no parameters, fetch immediately
             fetchAPI(endpoint);
           }
           
@@ -1131,7 +1472,6 @@ body.dark-mode .modal-dialog {
         }
         
 
-        // Copy button click
         if (e.target.closest(".copy-button")) {
           const textToCopy = document.getElementById("copyEndpointText").innerText;
           navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1143,13 +1483,11 @@ body.dark-mode .modal-dialog {
           });
         }
         
-        // Close modal
         if (e.target.id === "btn-close" || e.target === document.getElementById("apiResponseModal")) {
           document.getElementById("apiResponseModal").classList.remove("active");
         }
       });
 
-      // Submit parameters
       document.getElementById("submitParamBtn").addEventListener("click", () => {
         const form = document.getElementById("paramForm");
         const submitBtn = document.getElementById("submitParamBtn");
@@ -1182,7 +1520,6 @@ body.dark-mode .modal-dialog {
       const urlsSection = document.querySelector(".copy-section");
       const modal = document.getElementById("apiResponseModal");
 
-      // Show loading state
       paramForm.style.display = "none";
       document.getElementById("submitParamBtn").style.display = "none";
       loadingEl.style.display = "block";
@@ -1220,19 +1557,16 @@ body.dark-mode .modal-dialog {
 const themeIcon = document.getElementById("themeIcon");
 const savedTheme = localStorage.getItem("theme");
 
-// Atur tema awal
 if (savedTheme === "dark") {
   document.body.classList.add("dark-mode");
   themeIcon.classList.remove("fa-moon");
   themeIcon.classList.add("fa-sun");
 }
 
-// Toggle tema saat tombol diklik
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   const isDark = document.body.classList.contains("dark-mode");
 
-  // Ganti ikon
   if (isDark) {
     themeIcon.classList.remove("fa-moon");
     themeIcon.classList.add("fa-sun");
@@ -1241,9 +1575,9 @@ themeBtn.addEventListener("click", () => {
     themeIcon.classList.add("fa-moon");
   }
 
-  // Simpan ke localStorage
   localStorage.setItem("theme", isDark ? "dark" : "light");
 });
   </script>
 </body>
 </html>
+    
