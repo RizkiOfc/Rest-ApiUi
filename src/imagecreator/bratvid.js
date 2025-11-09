@@ -13,7 +13,7 @@ module.exports = function (app) {
                 return res.status(400).json({ status: false, error: 'Parameter `text` wajib diisi' });
             }
 
-            const videoUrl = `https://api.raolprojects.my.id/api/v2/maker/bratvid?text=${encodeURIComponent(text)}`;
+            const videoUrl = `https://api.siputzx.my.id/api/m/brat?text=${text}&isAnimated=true&delay=500`;
             const response = await axios.get(videoUrl, {
                 responseType: 'arraybuffer',
                 headers: {
